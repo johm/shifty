@@ -1,0 +1,21 @@
+$( document ).ready(function() {
+    $(".colorpicker").minicolors({theme: "bootstrap"})
+    $(".worker_draggable").each(function(){makedraggable($(this))});
+    $( ".task-target" ).droppable({
+	drop: function(event,ui){alert('hi');},
+	over: function(event,ui){$(this).addClass("bg-success")},
+	out: function(event,ui){$(this).removeClass("bg-success")}
+    });
+});
+
+
+function makedraggable(div){
+   div.draggable({
+       start: function(event,ui){makedraggable($(this).clone().insertBefore($(this)));false;},
+       drag: function(event,ui){
+	   $("#debug").html(ui.position.left);
+       }
+   });
+    
+}
+

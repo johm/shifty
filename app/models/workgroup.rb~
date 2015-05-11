@@ -1,0 +1,5 @@
+class Workgroup < ActiveRecord::Base
+  has_many :workgroup_memberships, :dependent => :destroy
+  has_many :workers, :through=>:workgroup_memberships
+
+end

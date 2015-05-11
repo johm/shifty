@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510154741) do
+ActiveRecord::Schema.define(version: 20150510170419) do
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "workgroup_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "tasks", ["workgroup_id"], name: "index_tasks_on_workgroup_id"
 
   create_table "workers", force: :cascade do |t|
     t.string   "firstname"
@@ -20,6 +29,22 @@ ActiveRecord::Schema.define(version: 20150510154741) do
     t.string   "email"
     t.string   "foreground"
     t.string   "background"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "workgroup_memberships", force: :cascade do |t|
+    t.integer  "worker_id"
+    t.integer  "workgroup_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "workgroup_memberships", ["worker_id"], name: "index_workgroup_memberships_on_worker_id"
+  add_index "workgroup_memberships", ["workgroup_id"], name: "index_workgroup_memberships_on_workgroup_id"
+
+  create_table "workgroups", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

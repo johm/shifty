@@ -1,0 +1,42 @@
+<%- model_class = Workgroup -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %>: <%= @workgroup.name %></h1>
+</div>
+
+
+
+<div class="row ">
+
+  <div class="col-sm-6">
+    <div class="well">
+      <h3>Tasks</h3>
+      <ul>
+	<% @workgroup.tasks.each do |task| -%>
+	<li><%= task.name %></li>
+	<% end %>
+      </ul>
+    </div>
+  </div>
+  
+  
+  <div class="col-sm-6">
+    <div class="well">
+      <h3>Workers</h3>
+      <ul>
+	<% @workgroup.workers.each do |worker| -%>
+	<li><%= link_to worker.name,worker %></li>
+	<% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              workgroups_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_workgroup_path(@workgroup), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              workgroup_path(@workgroup),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require jquery-ui
 //= require jquery.minicolors
+//= require jquery_nested_form
 //= require_tree .

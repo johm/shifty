@@ -48,4 +48,5 @@ end
 gem 'jquery-ui-rails'
 gem "twitter-bootstrap-rails"
 gem 'jquery-minicolors-rails'
-
+gem "nested_form"
+gem "tod"

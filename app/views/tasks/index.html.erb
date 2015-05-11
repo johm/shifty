@@ -1,4 +1,4 @@
-<%- model_class = Worker -%>
+<%- model_class = Task -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -6,32 +6,24 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:firstname) %></th>
-      <th><%= model_class.human_attribute_name(:lastname) %></th>
-      <th><%= model_class.human_attribute_name(:mobile) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:foreground) %></th>
-      <th><%= model_class.human_attribute_name(:background) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:workgroup_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @workers.each do |worker| %>
+    <% @tasks.each do |task| %>
       <tr>
-        <td><%= link_to worker.id, worker_path(worker) %></td>
-        <td><%= worker.firstname %></td>
-        <td><%= worker.lastname %></td>
-        <td><%= worker.mobile %></td>
-        <td><%= worker.email %></td>
-        <td><%= worker.foreground %></td>
-        <td><%= worker.background %></td>
-        <td><%=l worker.created_at %></td>
+        <td><%= link_to task.id, task_path(task) %></td>
+        <td><%= task.name %></td>
+        <td><%= task.workgroup_id %></td>
+        <td><%=l task.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_worker_path(worker), :class => 'btn btn-default btn-xs' %>
+                      edit_task_path(task), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      worker_path(worker),
+                      task_path(task),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
@@ -42,5 +34,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_worker_path,
+            new_task_path,
             :class => 'btn btn-primary' %>

@@ -1,0 +1,65 @@
+
+
+.day_of_week {
+    min-height:100px !important;
+}
+
+@for $i from 1 through 32 {                                                                                                                                
+    .col-#{$i*30}min {                                                                                                                                     
+	width: ($i/32) * 100%;}                                                                                                                             
+  .start-#{($i - 1)*30}min {                                                                                                                               
+	position:absolute;  
+	left: (($i - 1)/32) * 100%;}
+}      
+
+
+.col-with-label {
+    min-height:20px;
+    padding-left:30px;
+    position:relative;
+    margin-left:3px;
+    margin-top:2px;
+    margin-bottom:2px;
+    border-top:1px solid #999;
+    border-left:1px solid #999;
+    border-bottom:1px solid #999;
+    border-top-left-radius:4px;
+    border-bottom-left-radius:4px;
+}
+
+.col-with-label > .col-label {
+    position:absolute;
+    top:2px;
+    left:20px;
+    width:30px;
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+ }
+
+.col-with-flat-label {
+    min-height:20px;
+    padding-left:100px;
+    position:relative;
+
+ }
+
+.col-with-flat-label > .col-label {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100px;
+ }
+
+
+.col-content {
+    position:relative;
+ }
+
+
+.task {
+    border-bottom:1px dashed #ccc;
+ }
+
+.task:last-child {
+    border-bottom:0px dashed #ccc;
+ }

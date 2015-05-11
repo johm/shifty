@@ -1,41 +1,78 @@
-<%= form_for(@worker) do |f| %>
-  <% if @worker.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+<%= form_for @worker, :html => { :class => "form-horizontal worker" } do |f| %>
 
-      <ul>
-      <% @worker.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @worker.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @worker.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :firstname %><br>
-    <%= f.text_field :firstname %>
+  <div class="control-group">
+    <%= f.label :firstname, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :firstname, :class => 'form-control' %>
+    </div>
+    <%= error_span(@worker[:firstname]) %>
   </div>
-  <div class="field">
-    <%= f.label :lastname %><br>
-    <%= f.text_field :lastname %>
+  <div class="control-group">
+    <%= f.label :lastname, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lastname, :class => 'form-control' %>
+    </div>
+    <%= error_span(@worker[:lastname]) %>
   </div>
-  <div class="field">
-    <%= f.label :mobile %><br>
-    <%= f.text_field :mobile %>
+  <div class="control-group">
+    <%= f.label :mobile, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :mobile, :class => 'form-control' %>
+    </div>
+    <%= error_span(@worker[:mobile]) %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+    <%= error_span(@worker[:email]) %>
   </div>
-  <div class="field">
-    <%= f.label :foreground %><br>
-    <%= f.text_field :foreground %>
+  <div class="control-group">
+    <%= f.label :foreground, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :foreground, :class => 'form-control colorpicker' %>
+    </div>
+    <%= error_span(@worker[:foreground]) %>
   </div>
-  <div class="field">
-    <%= f.label :background %><br>
-    <%= f.text_field :background %>
+  <div class="control-group">
+    <%= f.label :background, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :background, :class => 'form-control  colorpicker' %>
+    </div>
+    <%= error_span(@worker[:background]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  
+  <div class="well">
+  <h3>Workgroups</h3>
+  <%= hidden_field_tag "worker[workgroup_ids][]", nil %>
+
+  <% Workgroup.all.each do |workgroup| -%>
+    <div>
+      <%= check_box_tag :workgroup_ids, workgroup.id, @worker.workgroups.include?(workgroup), :name => 'worker[workgroup_ids][]' -%>
+      <%= label_tag :workgroup_ids, workgroup.name -%>
+    </div>
+  <% end -%>
   </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            workers_path, :class => 'btn btn-default' %>
+
 <% end %>

@@ -3,7 +3,12 @@ $( document ).ready(function() {
     $(".worker_draggable").each(function(){makedraggable($(this))});
     $( ".task-target" ).droppable({
 	drop: function(event,ui){
-	    //make an ajax call to add a shift here
+	    worker_id=ui.draggable.data("worker");
+	    target_id=ui.draggable.data("task-target");
+	    day_of_week=ui.draggable.data("dayofweek-target");
+	    $.post("/shifts",{shift: {worker_id: worker_id,
+				      target_id: target_id,
+				     day_of_week: day_of_week}},null,'script');
 	},
 	over: function(event,ui){$(this).addClass("bg-success")},
 	out: function(event,ui){$(this).removeClass("bg-success")}

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Worker:</strong>
+  <%= @shift.worker %>
+</p>
+
+<p>
+  <strong>Day of week:</strong>
+  <%= @shift.day_of_week %>
+</p>
+
+<p>
+  <strong>Monday:</strong>
+  <%= @shift.monday %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @shift.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @shift.end_time %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @shift.task %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @shift.notes %>
+</p>
+
+<%= link_to 'Edit', edit_shift_path(@shift) %> |
+<%= link_to 'Back', shifts_path %>

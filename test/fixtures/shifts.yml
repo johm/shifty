@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  worker_id: 
+  day_of_week: 1
+  monday: 2015-05-11
+  start_time: MyString
+  end_time: MyString
+  task_id: 
+  notes: MyText
+
+two:
+  worker_id: 
+  day_of_week: 1
+  monday: 2015-05-11
+  start_time: MyString
+  end_time: MyString
+  task_id: 
+  notes: MyText

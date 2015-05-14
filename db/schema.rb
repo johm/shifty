@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510170419) do
+ActiveRecord::Schema.define(version: 20150511214445) do
+
+  create_table "shifts", force: :cascade do |t|
+    t.integer  "worker_id"
+    t.integer  "day_of_week"
+    t.date     "monday"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.integer  "task_id"
+    t.text     "notes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "shifts", ["task_id"], name: "index_shifts_on_task_id"
+  add_index "shifts", ["worker_id"], name: "index_shifts_on_worker_id"
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"

@@ -1,0 +1,2 @@
+$("#shift-<%= @shift.id%>").hide("puff");
+$("#shiftsummary").html("<%= escape_javascript(render :partial=>"shifts/shiftsummary",:locals=>{:shifts=>Shift.where(:monday => @shift.monday)}) %>");

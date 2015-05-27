@@ -1,4 +1,4 @@
-
+@import 'mediaqueries';
 
 .day_of_week {
     min-height:100px !important;
@@ -7,7 +7,7 @@
 @for $i from 1 through 32 {                                                                                                                                
     .col-#{$i*30}min {                                                                                                                                     
 	width: ($i/32) * 100%;}                                                                                                                             
-  .start-#{($i - 1)*30}min {                                                                                                                               
+ .start-#{($i - 1)*30}min {                                                                                                                               
 	position:absolute;  
 	left: (($i - 1)/32) * 100%;}
 }      
@@ -58,8 +58,44 @@
 
 .task {
     border-bottom:1px dashed #ccc;
+    padding-top:2px;
+    padding-bottom:2px;
  }
 
 .task:last-child {
     border-bottom:0px dashed #ccc;
  }
+
+.task:first-child {
+    border-bottom:1px dashed #ccc;
+ }
+
+
+
+.shift {
+position:relative;
+}
+
+
+@include breakpoint(md) {
+
+  .sidebar-nav {
+position:fixed;
+}	
+}
+
+
+#workerlist {
+list-style-type:none;
+margin-left:0px;
+padding-left:0px;
+li {
+display:inline;
+margin-left:10px;
+}
+}
+
+.workgrouplabel {
+padding-left:3px;
+}
+

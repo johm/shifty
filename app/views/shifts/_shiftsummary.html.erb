@@ -1,0 +1,9 @@
+<table class="table" id="shiftsummary">
+  <tr><th>Worker</th><th>Hours worked</th><th>Gross pay</th><th>Deductions</th><th>Net pay</th></tr>
+<% shifts_to_summary(shifts).each do |k,v|  %>
+<tr>
+  <td><%= v[:worker].name %></td>
+  <td><%= v[:hours] %></td>
+</tr>
+<% end %>
+</table>

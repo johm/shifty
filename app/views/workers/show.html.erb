@@ -1,8 +1,11 @@
 <%- model_class = Worker -%>
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
+<div class="row">
+<div class="col-xs-12">
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:firstname) %>:</strong></dt>
   <dd><%= @worker.firstname %></dd>
@@ -18,15 +21,6 @@
   <dd><%= @worker.background %></dd>
 </dl>
 
-<div class="well">
-  <h3>Workgroups</h3>
-  <ul>
-  <% @worker.workgroups.each do |workgroup| -%>
-  <li><%= link_to workgroup.name,workgroup %></li>
-  <% end %>
-  </ul>
-</div>
-
 <%= link_to t('.back', :default => t("helpers.links.back")),
               workers_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -36,3 +30,38 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+
+</div>
+</div>
+
+<br />
+
+<div class="row">
+<div class="col-sm-6">
+<div class="well">
+  <h3>Workgroups</h3>
+  <ul>
+  <% @worker.workgroups.each do |workgroup| -%>
+  <li><%= link_to workgroup.name,workgroup %></li>
+  <% end %>
+  </ul>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="well">
+  <h3>Payrates</h3>
+  <table class="table">
+    <tr><th>Effective</th><th>Hourly pay</th><th>Capital contributions</th><th>Anticipated wages</th></tr>
+    <% @worker.pay_rates.each do |pay_rate| %>
+    <tr>
+      <td><%= pay_rate.effective %></td>
+      <td><%= pay_rate.hourly_pay %></td>
+      <td><%= pay_rate.hourly_capital_contribution %></td>
+      <td><%= pay_rate.hourly_predicted_extra_wage %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+</div>
+
+</div>

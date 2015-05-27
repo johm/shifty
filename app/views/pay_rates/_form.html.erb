@@ -1,0 +1,66 @@
+<%= form_for @pay_rate, :html => { :class => "form-horizontal pay_rate" } do |f| %>
+
+    <% if @pay_rate.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@pay_rate.errors.count, "error") %> prohibited this pay_rate from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @pay_rate.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :worker_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :worker_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pay_rate[:worker_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :effective, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :effective, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pay_rate[:effective]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :hourly_pay_in_cents, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :hourly_pay_in_cents, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pay_rate[:hourly_pay_in_cents]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :hourly_capital_contribution_in_cents, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :hourly_capital_contribution_in_cents, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pay_rate[:hourly_capital_contribution_in_cents]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :hourly_predicted_extra_wage_in_cents, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :hourly_predicted_extra_wage_in_cents, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pay_rate[:hourly_predicted_extra_wage_in_cents]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :notes, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :notes, :class => 'form-control' %>
+    </div>
+    <%= error_span(@pay_rate[:notes]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            pay_rates_path, :class => 'btn btn-default' %>
+
+<% end %>

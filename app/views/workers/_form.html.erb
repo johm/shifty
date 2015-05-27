@@ -1,4 +1,4 @@
-<%= form_for @worker, :html => { :class => "form-horizontal worker" } do |f| %>
+<%= nested_form_for @worker, :html => { :class => "form-horizontal worker" } do |f| %>
 
     <% if @worker.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -57,7 +57,10 @@
     </div>
     <%= error_span(@worker[:background]) %>
   </div>
-  
+
+<br />
+<div class="row">  
+  <div class="col-sm-3">
   <div class="well">
   <h3>Workgroups</h3>
   <%= hidden_field_tag "worker[workgroup_ids][]", nil %>
@@ -75,4 +78,39 @@
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             workers_path, :class => 'btn btn-default' %>
 
+
+</div>
+  <div class="col-sm-9">
+    <div class="well">
+      <h3>Pay Rates</h3>
+        <div id="worker_pay_rates">
+	  <div class="row"><div class="col-xs-3">Effective</div><div class="col-xs-2">Hourly pay</div><div class="col-xs-2">Capital contributions</div><div class="col-xs-2">Anticipated wages</div></div>
+	  <%= f.fields_for :pay_rates do |pay_rate_form| %>
+	  <div class="row">
+	    <div class="col-xs-3">
+<div class="input-group">
+  <span class="input-group-addon"><i class="fa fa-calendar" ></i></span>
+<%= pay_rate_form.text_field :effective,:placeholder=>"Date this rate went into effect",:class=>'datepicker form-control' %>
+	    </div>
+</div>
+	    <div class="col-xs-2">
+	      <div class="input-group">
+		<span class="input-group-addon"><i class="fa fa-usd" ></i></span>
+		<%= pay_rate_form.text_field :hourly_pay,:placeholder=>"Hourly pay",:class=>"form-control" %></div></div> 
+	    <div class="col-xs-2">
+	      <div class="input-group">
+		<span class="input-group-addon"><i class="fa fa-usd" ></i></span>
+		<%= pay_rate_form.text_field :hourly_capital_contribution,:placeholder=>"Hourly capital contribution",:class=>"form-control" %></div></div>
+	    <div class="col-xs-2">
+	      <div class="input-group">
+		<span class="input-group-addon"><i class="fa fa-usd" ></i></span>
+		<%= pay_rate_form.text_field :hourly_predicted_extra_wage,:placeholder=>"Hourly predicted extra wage",:class=>"form-control" %></div></div>
+	  </div>
+	  <% end %>
+	  <br />
+		<%= f.link_to_add raw("<i class='fa fa-plus'></i> Add a new pay rate"), :pay_rates, {:class=>"btn btn-primary btn-sm",:id=>:click_to_add_pay_rate} %>
+
+    </div>
+  </div>
+</div>
 <% end %>

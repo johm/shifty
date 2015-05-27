@@ -1,4 +1,17 @@
-<h1>Week of: <%= @monday %></h1>
+<style type="text/css">
+  <% Worker.all.each do |w| %>
+  .shift.shiftworker-<%= w.id %>, .shift.shiftworker-<%= w.id %> a {
+  color:<%= w.foreground %>; 
+  background-color:<%= w.background %>; 
+  }
+				   
+<% end %>
+ 
+</style>
+
+<h1>Week of: <%= @monday %> <a class="btn btn-info  btn-sm" id="toggledescriptions" role="button"><i class="fa fa-edit"></i> Toggle descriptions</a></h1>
+
+
 
 <div class="col-with-label" style="margin-left:5px;">
   <div class="col-content"> 
@@ -8,9 +21,9 @@
 	  <div class="col-content time-ticks"> 
 	    <% (0..31).each do |i| %> 
 	    
-	    <div style="height:2000px;" class="<%= "col-30min start-#{i*30}min" %>"><% if i % 2 == 0 %> <%= colindex_to_time(i).strftime("%l%p") %> <% end %></div>
+	    <div style="height:2000px;" class="<%= "col-30min start-#{i*30}min" %>" data-start-time="<%= colindex_to_time(i).strftime("%l:%M%p") %>" ><% if i % 2 == 0 %> <%= colindex_to_time(i).strftime("%l%p") %> <% end %></div>
 	    
-	   
+	    
 	    <% end %>
 	  </div>
 	</div>
@@ -19,37 +32,52 @@
   </div>
 </div>
     
-<% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each do |day_of_week| %>
+<% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].each_with_index do |day_of_week,day_of_week_i| %>
 
-<div class="col-with-label day_of_week" style="margin-left:5px;">
+<div class="col-with-label day_of_week" id="day_of_week_<%= day_of_week_i%>" style="margin-left:5px;">
   <div class="col-label">
     <div class="day_name"><%= day_of_week %></div>
-  </div>
+  </div> 
   <div class="col-content">
     <% Workgroup.all.each do |workgroup| %>
-    <div class="col-with-label workgroup-row-<%= workgroup.id %>" >
+    <div class="workgrouprow col-with-label workgroup-row-<%= workgroup.id %>" >
       <div class="col-label"><div class="workgrouplabel"><%= workgroup.name %></div></div>
       <div class="col-content">
-
-	<% workgroup.tasks.each do |task| %>
-	<div class="col-with-flat-label task">
-	  <div class="col-label"><div class="workgrouplabel"><%= task.name %></div></div>
-	  <div class="col-content task-target" data-task-target="<% task.id%>" data-task-workgroup="<% workgroup.id%>" data-dayofweek-target="<% day_of_week %>" data-monday-target="<% @monday %>" >
-
-	  </div>
-	</div>
-	<% end %>
 	
-      </div>
-    </div>
-  </div>
-  <% end %>
-</div>
+	<% workgroup.tasks.each do |task| %>
+	<div class="col-with-flat-label task task_<%= task.id%>">
+	  <div class="col-label"><div class="workgrouplabel"><%= task.name %></div></div>
+	  <div class="col-content task-target" data-task-target="<%= task.id%>" data-task-workgroup="<%= workgroup.id%>" data-dayofweek-target="<%= day_of_week_i %>" data-monday-target="<%= @monday %>" >
+	    <% @shifts.select {|s| s.task_id == task.id && s.day_of_week==day_of_week_i}.each do |shift| %>
+	    
+	    <%= render shift %>
+	    
+	    <% end %>
+
+	  </div> <!-- matches task-target -->
+	</div> <!-- matches task -->
+	<% end %>
+      </div> <!-- matches content -->
+    </div> <!-- matches workgrouprow -->
+    <% end %>
+  </div><!-- matches content -->
+</div><!-- matches day_of_week -->
+
 
 <% end %>
 
+<br />
+
+<div class="well">
+<h3>Summary</h3>
+
+<%= render :partial => "shifts/shiftsummary", :locals => {:shifts => @shifts } %>
+
+</div>
+
+
 <%= content_for :sidebar do %>
-<div id="debug"></div>
+
 <h3>Workgroups</h3>
 <ul>
 <% Workgroup.all.each do |workgroup| %>
@@ -60,12 +88,14 @@
 </ul>
 
 <h3>Workers</h3>
-<ul>
+<ul id="workerlist">
 <% Worker.all.each do |worker| %>
 <li>
-  <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"><%= worker.name %></a>
+  <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"       style="color:<%= worker.foreground %>;background-color:<%= worker.background %>"  ><%= worker.name %></a>
 </li>
 <% end %>
 </ul>
+
+
 
 <% end %>

@@ -1,3 +1,26 @@
 // Place all the styles related to the Shifts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.shift {
+border:1px solid #ccc;
+padding:2px;	 
+font-size:10px;
+		
+	.shiftaction {
+	float:right;
+	font-size:16px;
+	margin-left:3px;
+	}
+	
+}
+
+
+.shiftdescription {
+		  font-style:italic;
+}
+
+.shift select, .shift input {
+color: #333;
+}

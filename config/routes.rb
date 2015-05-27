@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :shifts
+  resources :pay_rates
+  resources :shifts do 
+    member do
+      post 'colorfix'
+    end
+  end
+
   resources :tasks
   resources :workgroups
   resources :workers

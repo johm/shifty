@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511214445) do
+ActiveRecord::Schema.define(version: 20150526115132) do
+
+  create_table "pay_rates", force: :cascade do |t|
+    t.integer  "worker_id"
+    t.date     "effective"
+    t.integer  "hourly_pay_in_cents"
+    t.integer  "hourly_capital_contribution_in_cents"
+    t.integer  "hourly_predicted_extra_wage_in_cents"
+    t.text     "notes"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "pay_rates", ["worker_id"], name: "index_pay_rates_on_worker_id"
 
   create_table "shifts", force: :cascade do |t|
     t.integer  "worker_id"
@@ -23,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150511214445) do
     t.text     "notes"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
   add_index "shifts", ["task_id"], name: "index_shifts_on_task_id"

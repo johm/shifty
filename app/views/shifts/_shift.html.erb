@@ -1,0 +1,23 @@
+<div id="shift-<%= shift.id %>" 
+     data-shift-id="<%= shift.id %>" 
+     class="shift col-<%= shift.minutes_long %>min start-<%= shift.minutes_from_eight %>min  shiftworker-<%= shift.worker_id %> "
+     >
+  <a href="#" class="shiftedit"><i class="shiftaction fa fa-edit"></i></a>
+  <%= link_to('<i class="shiftaction fa fa-trash-o"></i>'.html_safe, shift, :remote=>true, :method => :delete,:class=>"") %>
+
+  <%= best_in_place shift,:worker_id,
+      :as=>:select,
+  :display_with => lambda {|w| Worker.find(w).name},
+  :collection=>shift.workgroup.workers.collect {|s| [s.id,s.name]} + Worker.all.find_all {|x| ! shift.workgroup.workers.include? x}.collect {|s| [s.id,s.name]}  ,
+  :class=>"shiftworkerpicker" %>
+  <span class="shift-start-time"><%= shift.start_time.strftime("%l:%M") %></span> 
+  -   
+  <span class="shift-end-time"><%= shift.end_time.strftime("%l:%M") %></span>
+
+  <div class="shiftdescription" style="display:none;">
+    <%= best_in_place shift, :description, :place_holder => "click to describe this shift" %>
+  </div>
+
+
+
+</div>

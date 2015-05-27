@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  worker_id: 
+  effective: 2015-05-26
+  hourly_pay_in_cents: 1
+  hourly_capital_contribution_in_cents: 1
+  hourly_predicted_extra_wage_in_cents: 1
+  notes: MyText
+
+two:
+  worker_id: 
+  effective: 2015-05-26
+  hourly_pay_in_cents: 1
+  hourly_capital_contribution_in_cents: 1
+  hourly_predicted_extra_wage_in_cents: 1
+  notes: MyText

@@ -28,6 +28,7 @@
     <div class="col-sm-6">
       <div class="well">
 	<h3>Tasks</h3>
+	<i>Please keep in mind that editing these changes all historical records</i>
 	<%= f.fields_for :tasks do |task_form| %>
 	<%= task_form.text_field :name,:placeholder=>"Name of task",:class=> 'form-control' %>
 	<% end %>
@@ -39,11 +40,11 @@
     <div class="col-sm-6">
       <div class="well">
 	<h3>Workers</h3>
-	<%= hidden_field_tag "worker[worker_ids][]", nil %>
+<!-- <%= hidden_field_tag "worker[worker_ids][]", nil %>-->
 	
 	<% Worker.all.each do |worker| -%>
 	<div>
-	  <%= check_box_tag :worker_ids, worker.id, @workgroup.workers.include?(worker), :name => 'worker[worker_ids][]' -%>
+	  <%= check_box_tag :worker_ids, worker.id, @workgroup.workers.include?(worker), :name => 'workgroup[worker_ids][]' -%>
 	  <%= label_tag :worker_ids, worker.name -%>
 	</div>
 	<% end -%>

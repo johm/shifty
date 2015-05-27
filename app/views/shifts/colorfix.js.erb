@@ -1,0 +1,4 @@
+$("#shift-<%= @shift.id %>").removeClass (function (index, css) {
+    return (css.match (/(^|\s)shiftworker-\S+/g) || []).join(' ');
+}).addClass("shiftworker-<%= @shift.worker.id %>");
+

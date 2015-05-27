@@ -1,0 +1,5 @@
+
+$("#shift-<%= @shift.id %>").effect("highlight");
+$("#shift-<%= @shift.id %>").find(".shift-start-time").html("<%=  @shift.start_time.strftime("%l:%M") %>");
+$("#shift-<%= @shift.id %>").find(".shift-end-time").html("<%=  @shift.end_time.strftime("%l:%M") %>");
+$("#shiftsummary").html("<%= escape_javascript(render :partial=>"shifts/shiftsummary",:locals=>{:shifts=>Shift.where(:monday => @shift.monday)}) %>");

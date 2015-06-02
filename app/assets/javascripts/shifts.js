@@ -15,7 +15,7 @@ $(document).ready(function(){
     $(".shift").each(function(){makeshiftdraggable($(this))});
     $(".shift").each(function(){makeshiftresizable($(this))});
     $("body").on("click",".shiftedit",function(){
-	$(this).parent().find(".shiftdescription").toggle(); //doesn't work for new elements
+	$(this).parent().find(".shiftdescription").toggle(); //doesn't work for new elements 
     });
 
 });

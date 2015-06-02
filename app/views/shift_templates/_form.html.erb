@@ -1,0 +1,38 @@
+<%= form_for @shift_template, :html => { :class => "form-horizontal shift_template" } do |f| %>
+
+    <% if @shift_template.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@shift_template.errors.count, "error") %> prohibited this shift_template from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @shift_template.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@shift_template[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :notes, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :notes, :class => 'form-control' %>
+    </div>
+    <%= error_span(@shift_template[:notes]) %>
+  </div>
+<br />
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            shift_templates_path, :class => 'btn btn-default' %>
+
+<% end %>

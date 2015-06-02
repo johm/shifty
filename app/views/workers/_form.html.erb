@@ -15,47 +15,66 @@
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :firstname, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :firstname, :class => 'form-control' %>
+  <div class="row">
+    <div class="col-sm-6">
+    <div class="control-group">
+      <%= f.label :firstname, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :firstname, :class => 'form-control' %>
+      </div>
+      <%= error_span(@worker[:firstname]) %>
     </div>
-    <%= error_span(@worker[:firstname]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :lastname, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :lastname, :class => 'form-control' %>
+    <div class="control-group">
+      <%= f.label :lastname, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :lastname, :class => 'form-control' %>
+      </div>
+      <%= error_span(@worker[:lastname]) %>
     </div>
-    <%= error_span(@worker[:lastname]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :mobile, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :mobile, :class => 'form-control' %>
+    <div class="control-group">
+      <%= f.label :mobile, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :mobile, :class => 'form-control' %>
+      </div>
+      <%= error_span(@worker[:mobile]) %>
     </div>
-    <%= error_span(@worker[:mobile]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'form-control' %>
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :email, :class => 'form-control' %>
+      </div>
+      <%= error_span(@worker[:email]) %>
     </div>
-    <%= error_span(@worker[:email]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :foreground, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :foreground, :class => 'form-control colorpicker' %>
+    <div class="control-group">
+      <%= f.label :foreground, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :foreground, :class => 'form-control colorpicker' %>
+      </div>
+      <%= error_span(@worker[:foreground]) %>
     </div>
-    <%= error_span(@worker[:foreground]) %>
-  </div>
-  <div class="control-group">
-    <%= f.label :background, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :background, :class => 'form-control  colorpicker' %>
+    <div class="control-group">
+      <%= f.label :background, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :background, :class => 'form-control  colorpicker' %>
+      </div>
+      <%= error_span(@worker[:background]) %>
     </div>
-    <%= error_span(@worker[:background]) %>
+    </div>
+    <div class="col-sm-6">
+    <div class="control-group">
+      <%= f.label "Notes on time off needed", :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_area :notes, :class => 'form-control',:rows=>10 %>
+      </div>
+      <%= error_span(@worker[:notes]) %>
+    </div>
+    <br />
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            workers_path, :class => 'btn btn-default' %>
+
+
+    </div>
   </div>
 
 <br />
@@ -107,7 +126,7 @@
 		<%= pay_rate_form.text_field :hourly_predicted_extra_wage,:placeholder=>"Hourly predicted extra wage",:class=>"form-control" %></div></div>
 	  </div>
 	  <% end %>
-	  <br />
+
 		<%= f.link_to_add raw("<i class='fa fa-plus'></i> Add a new pay rate"), :pay_rates, {:class=>"btn btn-primary btn-sm",:id=>:click_to_add_pay_rate} %>
 
     </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526115132) do
+ActiveRecord::Schema.define(version: 20150530220545) do
 
   create_table "pay_rates", force: :cascade do |t|
     t.integer  "worker_id"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20150526115132) do
 
   add_index "pay_rates", ["worker_id"], name: "index_pay_rates_on_worker_id"
 
+  create_table "shift_templates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shifts", force: :cascade do |t|
     t.integer  "worker_id"
     t.integer  "day_of_week"
@@ -34,11 +41,13 @@ ActiveRecord::Schema.define(version: 20150526115132) do
     t.string   "end_time"
     t.integer  "task_id"
     t.text     "notes"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.text     "description"
+    t.integer  "shift_template_id"
   end
 
+  add_index "shifts", ["shift_template_id"], name: "index_shifts_on_shift_template_id"
   add_index "shifts", ["task_id"], name: "index_shifts_on_task_id"
   add_index "shifts", ["worker_id"], name: "index_shifts_on_worker_id"
 
@@ -60,6 +69,7 @@ ActiveRecord::Schema.define(version: 20150526115132) do
     t.string   "background"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "notes"
   end
 
   create_table "workgroup_memberships", force: :cascade do |t|

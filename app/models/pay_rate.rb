@@ -4,5 +4,6 @@ class PayRate < ActiveRecord::Base
   monetize :hourly_capital_contribution_in_cents, :as => "hourly_capital_contribution"
   monetize :hourly_predicted_extra_wage_in_cents, :as => "hourly_predicted_extra_wage"
 
+  default_scope {order("effective ASC")}
 
 end

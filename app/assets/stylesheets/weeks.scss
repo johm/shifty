@@ -31,7 +31,7 @@
     position:absolute;
     top:2px;
     left:20px;
-    width:30px;
+//    width:30px;
     transform: rotate(90deg);
     transform-origin: left top 0;
  }
@@ -99,3 +99,15 @@ margin-left:10px;
 padding-left:3px;
 }
 
+#weekheader {
+text-align:center;
+	a {
+	color:#ccc;
+	}	
+}
+
+.fa-heart {display:none;}
+
+.col-900min .fa-heart, .col-930min .fa-heart, .col-1000min .fa-heart {
+	    display:inline;
+} 

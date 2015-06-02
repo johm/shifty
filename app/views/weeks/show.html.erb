@@ -9,7 +9,21 @@
  
 </style>
 
-<h1>Week of: <%= @monday %> <a class="btn btn-info  btn-sm" id="toggledescriptions" role="button"><i class="fa fa-edit"></i> Toggle descriptions</a></h1>
+<h1 id="weekheader">
+<% unless @monday.nil? %>
+  <a href="/weeks/<%= @monday-7.days %>"><i class="fa fa-arrow-left"></i></a>
+  Week of: <%= @monday %>
+  <a href="/weeks/<%= @monday+7.days %>"><i class="fa fa-arrow-right"></i></a>
+<% end %>
+<% unless @shift_template.nil? %>
+Shift template: <%= @shift_template.name %> <br />
+<small><i><%= best_in_place @shift_template, :notes, :place_holder => "click to add notes" %></i></small>
+<% end %>
+
+</h1>
+
+
+
 
 
 
@@ -36,7 +50,11 @@
 
 <div class="col-with-label day_of_week" id="day_of_week_<%= day_of_week_i%>" style="margin-left:5px;">
   <div class="col-label">
-    <div class="day_name"><%= day_of_week %></div>
+    <div class="day_name">
+      <%= day_of_week %>
+      <%= (@monday+day_of_week_i.days).strftime("%-m/%-d") if @shift_template.nil? %>
+    </div>
+
   </div> 
   <div class="col-content">
     <% Workgroup.all.each do |workgroup| %>
@@ -47,7 +65,7 @@
 	<% workgroup.tasks.each do |task| %>
 	<div class="col-with-flat-label task task_<%= task.id%>">
 	  <div class="col-label"><div class="workgrouplabel"><%= task.name %></div></div>
-	  <div class="col-content task-target" data-task-target="<%= task.id%>" data-task-workgroup="<%= workgroup.id%>" data-dayofweek-target="<%= day_of_week_i %>" data-monday-target="<%= @monday %>" >
+	  <div class="col-content task-target" data-task-target="<%= task.id%>" data-task-workgroup="<%= workgroup.id%>" data-dayofweek-target="<%= day_of_week_i %>" data-monday-target="<%= @monday %>" data-shift-template-target="<%= @shift_template.id rescue '' %>" >
 	    <% @shifts.select {|s| s.task_id == task.id && s.day_of_week==day_of_week_i}.each do |shift| %>
 	    
 	    <%= render shift %>
@@ -75,9 +93,23 @@
 
 </div>
 
+<% if @shift_template.nil? %>
+<div class="well">
+  <h4>Overwrite task lines on this schedule with a shift template</h4>
+  <%= form_tag "/weeks/#{@monday}/apply_shift_template" do  %>
+  <div class="form-group">
+    <select name="shift_template_id" class="form-control"  >
+      <%= options_from_collection_for_select(ShiftTemplate.all.order('created_at desc'), :id, :name) %>
+    </select>
+    <br />
+    <%= submit_tag "Apply the template", class: "btn", data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+</div>
+<% end %>
 
 <%= content_for :sidebar do %>
-
+<a class="btn btn-info  btn-xs" id="toggledescriptions" role="button"><i class="fa fa-edit"></i> Toggle descriptions</a>
 <h3>Workgroups</h3>
 <ul>
 <% Workgroup.all.each do |workgroup| %>
@@ -91,7 +123,7 @@
 <ul id="workerlist">
 <% Worker.all.each do |worker| %>
 <li>
-  <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"       style="color:<%= worker.foreground %>;background-color:<%= worker.background %>"  ><%= worker.name %></a>
+  <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"       style="color:<%= worker.foreground %>;background-color:<%= worker.background %>"  data-toggle="tooltip" data-placement="bottom" title="<%= escape_javascript(worker.notes) %>" ><%= worker.name %></a>
 </li>
 <% end %>
 </ul>

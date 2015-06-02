@@ -5,6 +5,7 @@
   <a href="#" class="shiftedit"><i class="shiftaction fa fa-edit"></i></a>
   <%= link_to('<i class="shiftaction fa fa-trash-o"></i>'.html_safe, shift, :remote=>true, :method => :delete,:class=>"") %>
 
+  <i class="fa fa-heart"></i>
   <%= best_in_place shift,:worker_id,
       :as=>:select,
   :display_with => lambda {|w| Worker.find(w).name},

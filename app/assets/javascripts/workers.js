@@ -6,6 +6,7 @@ $(document).on('nested:fieldAdded', function(event){
 
 $( document ).ready(function() {
     $(".colorpicker").minicolors({theme: "bootstrap"});
+    $('[data-toggle="tooltip"]').tooltip()
     $(".worker_draggable").each(function(){makedraggable($(this))});
     $( ".task-target" ).droppable({
 	accept: ".worker_draggable",
@@ -14,6 +15,7 @@ $( document ).ready(function() {
 	    task_id=$(this).data("task-target");
 	    day_of_week=$(this).data("dayofweek-target");
 	    monday=$(this).data("monday-target");
+	    shift_template_id=$(this).data("shift-template-target");
 	    start_time=ui.draggable.data("start-time");
 
 	    
@@ -21,6 +23,7 @@ $( document ).ready(function() {
 				      task_id: task_id,
 				      day_of_week: day_of_week,
 				      monday: monday,
+				      shift_template_id: shift_template_id,
 				      start_time: start_time
 				     }},null,'script');
 	},

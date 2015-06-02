@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :shift_templates
   resources :pay_rates
   resources :shifts do 
     member do
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'weeks#current'
+  get 'weeks/:monday' => 'weeks#show'
+  post 'weeks/:monday/apply_shift_template' => 'weeks#apply_shift_template'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

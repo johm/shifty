@@ -108,6 +108,40 @@ Shift template: <%= @shift_template.name %> <br />
 </div>
 <% end %>
 
+
+<div class="well">
+  <h3>Notes</h3>
+  <div id="week_notes">
+    <% @notes.each do |n| %>
+    <%= render :partial => "week_notes/week_note", :locals => {:note => n } %>
+    <% end %>
+  </div>
+  <hr />
+  <%= form_for WeekNote.new, remote: true, url: {action: "create",:controller => :week_notes}, html: {class: "form-horizontal"} do |f| %>
+  <%= f.hidden_field :monday, :value=>@monday %>
+  <div class="form-group">
+    <%= f.label "Note", :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.text_area :note, {class: "form-control",id: "week_note_note"} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "By:", :class => 'control-label col-md-4' %>
+      <div class="controls col-md-8">
+	<%= f.text_field :author, {class: "form-control",id: "week_note_author"} %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <div class="controls col-md-8 col-md-offset-4">
+      <%= f.submit "Post"  ,{class: "form-control"}%>
+    </div>
+  </div>
+  <% end %>
+    
+</div>
+
 <%= content_for :sidebar do %>
 <a class="btn btn-info  btn-xs" id="toggledescriptions" role="button"><i class="fa fa-edit"></i> Toggle descriptions</a>
 <h3>Workgroups</h3>

@@ -1,0 +1,6 @@
+$("#week_notes").append("<%= escape_javascript(render :partial=>"week_notes/week_note",:locals=>{:note=>@week_note}) %>");
+$("#week_notes .week_note:last-child").effect("highlight");
+$("#week_note_note").val("");
+$("#week_note_author").val("");
+
+ 

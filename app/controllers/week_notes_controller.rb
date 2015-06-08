@@ -30,6 +30,7 @@ class WeekNotesController < ApplicationController
       if @week_note.save
         format.html { redirect_to @week_note, notice: 'Week note was successfully created.' }
         format.json { render :show, status: :created, location: @week_note }
+        format.js {}
       else
         format.html { render :new }
         format.json { render json: @week_note.errors, status: :unprocessable_entity }

@@ -53,3 +53,6 @@ gem "tod"
 gem 'best_in_place', '~> 3.0.1'
 gem 'money-rails'
 gem 'jquery-timepicker-rails'
+gem "devise", ">= 2.2.3"
+gem "cancancan"
+gem "rolify"

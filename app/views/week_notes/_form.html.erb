@@ -1,29 +1,45 @@
-<%= form_for(@week_note) do |f| %>
-  <% if @week_note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@week_note.errors.count, "error") %> prohibited this week_note from being saved:</h2>
+<%= form_for @week_note, :html => { :class => "form-horizontal week_note" } do |f| %>
 
-      <ul>
-      <% @week_note.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @week_note.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@week_note.errors.count, "error") %> prohibited this week_note from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @week_note.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :note %><br>
-    <%= f.text_area :note %>
+  <div class="control-group">
+    <%= f.label :note, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :note, :class => 'form-control' %>
+    </div>
+    <%= error_span(@week_note[:note]) %>
   </div>
-  <div class="field">
-    <%= f.label :monday %><br>
-    <%= f.date_select :monday %>
+  <div class="control-group">
+    <%= f.label :monday, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :monday, :class => 'form-control' %>
+    </div>
+    <%= error_span(@week_note[:monday]) %>
   </div>
-  <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_area :author %>
+  <div class="control-group">
+    <%= f.label :author, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :author, :class => 'form-control' %>
+    </div>
+    <%= error_span(@week_note[:author]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            week_notes_path, :class => 'btn btn-default' %>
+
 <% end %>

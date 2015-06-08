@@ -3,12 +3,14 @@ class WeeksController < ApplicationController
   def current
     @monday=Date.today.beginning_of_week
     @shifts=Shift.where(:monday => @monday)
+    @notes=WeekNote.where(:monday => @monday)
     render :show
   end
 
   def show
     @monday=Date.parse(params[:monday])
     @shifts=Shift.where(:monday => @monday)
+    @notes=WeekNote.where(:monday => @monday)
     render :show
   end
 

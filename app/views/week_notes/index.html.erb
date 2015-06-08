@@ -1,31 +1,40 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Week Notes</h1>
-
-<table>
+<%- model_class = WeekNote -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Note</th>
-      <th>Monday</th>
-      <th>Author</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:note) %></th>
+      <th><%= model_class.human_attribute_name(:monday) %></th>
+      <th><%= model_class.human_attribute_name(:author) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @week_notes.each do |week_note| %>
       <tr>
+        <td><%= link_to week_note.id, week_note_path(week_note) %></td>
         <td><%= week_note.note %></td>
         <td><%= week_note.monday %></td>
         <td><%= week_note.author %></td>
-        <td><%= link_to 'Show', week_note %></td>
-        <td><%= link_to 'Edit', edit_week_note_path(week_note) %></td>
-        <td><%= link_to 'Destroy', week_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l week_note.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_week_note_path(week_note), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      week_note_path(week_note),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Week note', new_week_note_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_week_note_path,
+            :class => 'btn btn-primary' %>

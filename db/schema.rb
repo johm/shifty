@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530220545) do
+ActiveRecord::Schema.define(version: 20150607213706) do
 
   create_table "pay_rates", force: :cascade do |t|
     t.integer  "worker_id"
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(version: 20150530220545) do
   end
 
   add_index "tasks", ["workgroup_id"], name: "index_tasks_on_workgroup_id"
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "amount_in_cents"
+    t.date     "date_made"
+    t.integer  "worker_id"
+    t.text     "notes"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "transactiontype"
+  end
+
+  add_index "transactions", ["worker_id"], name: "index_transactions_on_worker_id"
 
   create_table "workers", force: :cascade do |t|
     t.string   "firstname"

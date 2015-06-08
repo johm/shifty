@@ -1,0 +1,29 @@
+<%= form_for(@week_note) do |f| %>
+  <% if @week_note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@week_note.errors.count, "error") %> prohibited this week_note from being saved:</h2>
+
+      <ul>
+      <% @week_note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :note %><br>
+    <%= f.text_area :note %>
+  </div>
+  <div class="field">
+    <%= f.label :monday %><br>
+    <%= f.date_select :monday %>
+  </div>
+  <div class="field">
+    <%= f.label :author %><br>
+    <%= f.text_area :author %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

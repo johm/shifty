@@ -111,3 +111,9 @@ text-align:center;
 .col-900min .fa-heart, .col-930min .fa-heart, .col-1000min .fa-heart {
 	    display:inline;
 } 
+
+
+td.grayed, th.grayed {
+	background-color: #f5f5f5;
+	color:#666;  
+}

@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy,:report]
 
   # GET /tasks
   # GET /tasks.json
@@ -11,6 +11,13 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
   end
+
+  def report 
+    @from_date=params[:from_date]
+    @to_date=params[:to_date]
+    @shifts=@task.shifts.where(:shift_template_id => nil ).where("monday >= ? and monday < ?",@from_date,@to_date)
+  end
+
 
   # GET /tasks/new
   def new

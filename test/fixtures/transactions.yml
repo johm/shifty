@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount_in_cents: 1
+  date_made: 2015-06-07
+  worker_id: 
+  notes: MyText
+
+two:
+  amount_in_cents: 1
+  date_made: 2015-06-07
+  worker_id: 
+  notes: MyText

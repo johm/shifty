@@ -52,3 +52,4 @@ gem "nested_form"
 gem "tod"
 gem 'best_in_place', '~> 3.0.1'
 gem 'money-rails'
+gem 'jquery-timepicker-rails'

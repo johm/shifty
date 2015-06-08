@@ -1,10 +1,14 @@
 class Shift < ActiveRecord::Base
   belongs_to :worker
   belongs_to :task
+  belongs_to :shift_template
   has_one :workgroup, :through => :task
 
   serialize :start_time, Tod::TimeOfDay
   serialize :end_time, Tod::TimeOfDay
+
+  validates :task,:presence => true
+  validates :worker,:presence => true
   
   def shiftrange 
     Tod::Shift.new(start_time,end_time)
@@ -42,6 +46,8 @@ class Shift < ActiveRecord::Base
     applicable_pay_rate.hourly_predicted_extra_wage*hours_long rescue Money.new(0)
   end
 
-
+  def total_expense
+    total_hourly_pay+total_hourly_predicted_extra_wage+total_hourly_capital_contribution
+  end
 
 end

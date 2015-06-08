@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @week_note.note %>
+</p>
+
+<p>
+  <strong>Monday:</strong>
+  <%= @week_note.monday %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @week_note.author %>
+</p>
+
+<%= link_to 'Edit', edit_week_note_path(@week_note) %> |
+<%= link_to 'Back', week_notes_path %>

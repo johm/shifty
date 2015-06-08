@@ -1,0 +1,46 @@
+<h1><a href="/workers/<%= @worker.id %>"><i class="fa fa-arrow-left"></i><%= @worker.name %></a></h1>
+<div class="well">
+  <h3>Get a report</h3>
+  <%= form_for @worker, :method => :get, :url => {:action => "report"}, :html => { :class => "form-horizontal worker" } do |f| %>
+  
+  <div class="form-group">
+    <%= f.label "From", :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= text_field_tag :from_date, @from_date, {:class => 'mondaypicker form-control'} %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label "To", :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= text_field_tag :to_date, @to_date, {:class => 'mondaypicker form-control'} %>
+    </div>
+  </div>
+  
+  <%= f.submit "Get report", :class => 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<table class="table">
+  <tr><th>Task</th><th>Hours</th><th>Wage due immediately</th><th>Capital account contribution</th><th>Anticipated wages</th><th>Total (anticipated) expense</th></tr>
+  <% @shifts.collect {|x| x.task}.uniq.each do |t| %>
+  <tr>
+    <td><%= t.name %></td>
+    <td><%= @shifts.where(:task=>t).inject(0){|sum,s| sum+s.hours_long } %></td>
+    <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></td>
+    <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></td>
+    <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></td>
+    <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_expense } %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <th>Total</th>
+    <th><%= @shifts.inject(0){|sum,s| sum+s.hours_long } %></th>
+    <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></th>
+    <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></th>
+    <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></th>
+    <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_expense } %></th>
+  </tr>
+
+
+</table>

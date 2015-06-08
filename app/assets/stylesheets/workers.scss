@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+a.btn.btn-primary:visited,a.btn.btn-danger:visited,a.btn.btn-info:visited  {
+color:white;
+}
+
 
 .task-target {
 min-height:20px;

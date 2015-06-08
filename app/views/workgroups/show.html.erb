@@ -12,7 +12,7 @@
       <h3>Tasks</h3>
       <ul>
 	<% @workgroup.tasks.each do |task| -%>
-	<li><%= task.name %></li>
+	<li><%= link_to task.name,task %></li>
 	<% end %>
       </ul>
     </div>
@@ -31,10 +31,35 @@
   </div>
 </div>
 
+<div class="col-sm-6">
 <%= link_to t('.back', :default => t("helpers.links.back")),
               workgroups_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_workgroup_path(@workgroup), :class => 'btn btn-default' %>
+</div>
 
+<div class="col-sm-6">
+  <div class="well">
+    <h3>Get a report</h3>
+        <%= form_for @workgroup, :method => :get, :url => {:action => "report"}, :html => { :class => "form-horizontal workgroup" } do |f| %>
+    
+    <div class="form-group">
+      <%= f.label "From", :class => 'control-label col-md-4' %>
+      <div class="controls col-md-8">
+	<%= text_field_tag :from_date, Date.today.beginning_of_week - 1.week, {:class => 'mondaypicker form-control'} %>
+      </div>
+    </div>
 
+    <div class="form-group">
+      <%= f.label "To", :class => 'control-label col-md-4' %>
+      <div class="controls col-md-8">
+	<%= text_field_tag :to_date, Date.today.beginning_of_week, {:class => 'mondaypicker form-control'} %>
+      </div>
+    </div>
+
+    <%= f.submit "Get report", :class => 'btn btn-primary' %>
+    <% end %>
+
+  </div>
+</div>
 

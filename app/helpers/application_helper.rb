@@ -1,5 +1,11 @@
 module ApplicationHelper
-  
+
+  def getsomemondays(monday)
+    mondays=[]
+    mondays.append((1..10).collect {|x| monday - x.weeks})
+    mondays.append((0..10).collect {|x| monday + x.weeks})
+    return mondays.flatten
+  end
 
   def colindex_to_time(i) 
     Tod::TimeOfDay.new("8","0")+(i*30).minutes

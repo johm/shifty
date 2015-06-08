@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Week Notes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Note</th>
+      <th>Monday</th>
+      <th>Author</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @week_notes.each do |week_note| %>
+      <tr>
+        <td><%= week_note.note %></td>
+        <td><%= week_note.monday %></td>
+        <td><%= week_note.author %></td>
+        <td><%= link_to 'Show', week_note %></td>
+        <td><%= link_to 'Edit', edit_week_note_path(week_note) %></td>
+        <td><%= link_to 'Destroy', week_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Week note', new_week_note_path %>

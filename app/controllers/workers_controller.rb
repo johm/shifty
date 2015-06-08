@@ -1,5 +1,5 @@
 class WorkersController < ApplicationController
-  before_action :set_worker, only: [:show, :edit, :update, :destroy]
+  before_action :set_worker, only: [:show, :edit, :update, :destroy, :report,:capital]
 
   # GET /workers
   # GET /workers.json
@@ -15,6 +15,27 @@ class WorkersController < ApplicationController
   # GET /workers/new
   def new
     @worker = Worker.new
+  end
+
+  def capital 
+    @shifts=@worker.shifts.where(:shift_template_id => nil )
+
+    #{:what, :date_made, :amount} 
+    
+    @entries=(@shifts.collect {|s| {:what=>s,:date_made=>s.date, :amount=>s.total_hourly_capital_contribution}}.find_all {|e| e[:amount] > 0} + 
+              @worker.transactions.collect {|t| {:what=>t,:date_made=>t.date_made, :amount=> t.transactiontype == "contribution" ? t.amount : t.amount * -1}}).sort_by { |hsh| hsh[:date_made] } 
+    
+
+    
+    
+
+
+  end
+
+  def report 
+    @from_date=params[:from_date]
+    @to_date=params[:to_date]
+    @shifts=@worker.shifts.where(:shift_template_id => nil ).where("monday >= ? and monday < ?",@from_date,@to_date)
   end
 
   # GET /workers/1/edit

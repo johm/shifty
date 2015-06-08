@@ -11,6 +11,12 @@ class ShiftsController < ApplicationController
   # GET /shifts/1.json
   def show
   end
+  
+  def report 
+    @from_date=params[:from_date]
+    @to_date=params[:to_date]
+    @shifts=Shift.where(:shift_template_id => nil ).where("monday >= ? and monday < ?",@from_date,@to_date)
+  end
 
   def colorfix 
     respond_to do |format|

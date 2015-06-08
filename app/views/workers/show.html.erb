@@ -17,20 +17,7 @@
               workers_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_worker_path(@worker), :class => 'btn btn-default' %>
-
-</div>
-<div class="col-sm-6">
-  <div class="well">
-    <h3>Get a report</h3>
-  </div>
-</div>
-
-</div>
-
-<br />
-
-<div class="row">
-<div class="col-sm-6">
+<hr />
 <div class="well">
   <h3>Workgroups</h3>
   <ul>
@@ -39,8 +26,7 @@
   <% end %>
   </ul>
 </div>
-</div>
-<div class="col-sm-6">
+
 <div class="well">
   <h3>Payrates</h3>
   <table class="table">
@@ -55,9 +41,63 @@
     <% end %>
   </table>
 </div>
-</div>
 
 </div>
+<div class="col-sm-6">
+  <div class="well">
+    <h3>Get a shift report</h3>
+    <%= form_for @worker, :method => :get, :url => {:action => "report"}, :html => { :class => "form-horizontal worker" } do |f| %>
+    
+    <div class="form-group">
+      <%= f.label "From", :class => 'control-label col-md-4' %>
+      <div class="controls col-md-8">
+	<%= text_field_tag :from_date, Date.today.beginning_of_week - 1.week, {:class => 'mondaypicker form-control'} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "To", :class => 'control-label col-md-4' %>
+      <div class="controls col-md-8">
+	<%= text_field_tag :to_date, Date.today.beginning_of_week, {:class => 'mondaypicker form-control'} %>
+      </div>
+    </div>
+
+    
+    
+    <%= f.submit "Get report", :class => 'btn btn-primary' %>
+    <% end %>
+
+  </div>
+
+<div class="well">
+<h3>Contributions and distributions</h3>
+
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Type</th>
+    <th>Amount</th>
+    <th>Notes</th>
+  </tr>
+  <% @worker.transactions.order("date_made ASC").each do |t| %>
+  <tr>
+    <td><%= link_to t.date_made, t %></td>
+    <td><%= t.transactiontype %></td>
+    <td>$<%= t.amount %></td>
+    <td><%= t.notes %> </td>
+  </tr>
+  <% end %>
+</table>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+new_transaction_path(:worker_id=>@worker),:class => 'btn btn-primary' %> 
+<%= link_to "View full capital account history","/workers/#{@worker.id}/capital",
+:class => 'btn btn-default' %> 
+
+
+</div>
+</div>
+</div>
+
 
 
 <%= content_for :sidebar do %>

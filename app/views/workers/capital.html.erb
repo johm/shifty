@@ -1,0 +1,29 @@
+
+<h1>Complete history for <%= @worker.name%>'s capital account</h1>
+
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>What</th>
+    <th>Amount</th>
+    <th>Balance</th>
+  </tr>
+  
+  <% balance=0 %>
+  <% @entries.each do |entry| %>
+  <% balance=balance+entry[:amount] %>
+  <tr>
+    <td><%= entry[:date_made] %></td>
+    <td>
+      <% if entry[:what].is_a? (Transaction) %>
+      <%= link_to entry[:what].transactiontype, entry[:what] %>
+      <% else %>
+      <%= link_to "shift", "/weeks/#{entry[:what].monday}" %>
+      <% end %>
+    </td>
+    <td><%= entry[:amount] %></td>
+    <td><%= balance %></td>
+  </tr>
+  <% end %>
+
+</table>

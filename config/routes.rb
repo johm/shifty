@@ -1,15 +1,35 @@
 Rails.application.routes.draw do
+  resources :week_notes
+  resources :transactions
   resources :shift_templates
   resources :pay_rates
   resources :shifts do 
+    collection do
+      get 'report'
+    end
     member do
       post 'colorfix'
     end
   end
 
-  resources :tasks
-  resources :workgroups
-  resources :workers
+  resources :tasks do 
+    member do 
+      get 'report'
+    end
+  end
+
+  resources :workgroups do 
+    member do 
+      get 'report'
+    end
+  end
+
+  resources :workers do 
+    member do 
+      get 'report'
+      get 'capital'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

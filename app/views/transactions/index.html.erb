@@ -1,0 +1,42 @@
+<%- model_class = Transaction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:amount_in_cents) %></th>
+      <th><%= model_class.human_attribute_name(:date_made) %></th>
+      <th><%= model_class.human_attribute_name(:worker_id) %></th>
+      <th><%= model_class.human_attribute_name(:notes) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= link_to transaction.id, transaction_path(transaction) %></td>
+        <td><%= transaction.amount_in_cents %></td>
+        <td><%= transaction.date_made %></td>
+        <td><%= transaction.worker_id %></td>
+        <td><%= transaction.notes %></td>
+        <td><%=l transaction.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_transaction_path(transaction), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      transaction_path(transaction),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_transaction_path,
+            :class => 'btn btn-primary' %>

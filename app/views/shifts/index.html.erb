@@ -1,39 +1,52 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Shifts</h1>
-
-<table>
+<%- model_class = Shift -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Worker</th>
-      <th>Day of week</th>
-      <th>Monday</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Task</th>
-      <th>Notes</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:worker_id) %></th>
+      <th><%= model_class.human_attribute_name(:day_of_week) %></th>
+      <th><%= model_class.human_attribute_name(:monday) %></th>
+      <th><%= model_class.human_attribute_name(:start_time) %></th>
+      <th><%= model_class.human_attribute_name(:end_time) %></th>
+      <th><%= model_class.human_attribute_name(:task_id) %></th>
+      <th><%= model_class.human_attribute_name(:notes) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:shift_template_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @shifts.each do |shift| %>
       <tr>
-        <td><%= shift.worker %></td>
+        <td><%= link_to shift.id, shift_path(shift) %></td>
+        <td><%= shift.worker_id %></td>
         <td><%= shift.day_of_week %></td>
         <td><%= shift.monday %></td>
         <td><%= shift.start_time %></td>
         <td><%= shift.end_time %></td>
-        <td><%= shift.task %></td>
+        <td><%= shift.task_id %></td>
         <td><%= shift.notes %></td>
-        <td><%= link_to 'Show', shift %></td>
-        <td><%= link_to 'Edit', edit_shift_path(shift) %></td>
-        <td><%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= shift.description %></td>
+        <td><%= shift.shift_template_id %></td>
+        <td><%=l shift.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_shift_path(shift), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      shift_path(shift),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Shift', new_shift_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_shift_path,
+            :class => 'btn btn-primary' %>

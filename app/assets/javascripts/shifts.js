@@ -1,6 +1,8 @@
+
+
 $(document).ready(function(){
     $(".best_in_place").best_in_place();
-    
+    $(".timepicker").timepicker({ 'forceRoundTime': true });    
     $('.shift').on("ajax:success",".best_in_place.shiftworkerpicker", function () {
 	shift_id=$(this).closest('.shift').data("shift-id");
 	$.ajax({
@@ -18,6 +20,12 @@ $(document).ready(function(){
 	$(this).parent().find(".shiftdescription").toggle(); //doesn't work for new elements 
     });
 
+
+
+//    $("body").on("click",".shift",function(event){
+//
+//    });
+
 });
 
 
@@ -34,7 +42,7 @@ function makeshiftresizable(div){
 		 if (left_pos >= $(this).offset().left && (left_pos < ($(this).offset().left + $(this).width()))){
 		     $(this).addClass("bg-success");
 		     the_resizable.data("start-time",$(this).data("start-time"));
-		 }
+ 		 }
 		 else {
 		     if (right_pos >= $(this).offset().left && (right_pos < ($(this).offset().left + $(this).width()))){
 			 $(this).addClass("bg-success");

@@ -1,39 +1,35 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Shift -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Worker:</strong>
-  <%= @shift.worker %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:worker_id) %>:</strong></dt>
+  <dd><%= @shift.worker_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:day_of_week) %>:</strong></dt>
+  <dd><%= @shift.day_of_week %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:monday) %>:</strong></dt>
+  <dd><%= @shift.monday %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:start_time) %>:</strong></dt>
+  <dd><%= @shift.start_time %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:end_time) %>:</strong></dt>
+  <dd><%= @shift.end_time %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:task_id) %>:</strong></dt>
+  <dd><%= @shift.task_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
+  <dd><%= @shift.notes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @shift.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:shift_template_id) %>:</strong></dt>
+  <dd><%= @shift.shift_template_id %></dd>
+</dl>
 
-<p>
-  <strong>Day of week:</strong>
-  <%= @shift.day_of_week %>
-</p>
-
-<p>
-  <strong>Monday:</strong>
-  <%= @shift.monday %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @shift.start_time %>
-</p>
-
-<p>
-  <strong>End time:</strong>
-  <%= @shift.end_time %>
-</p>
-
-<p>
-  <strong>Task:</strong>
-  <%= @shift.task %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @shift.notes %>
-</p>
-
-<%= link_to 'Edit', edit_shift_path(@shift) %> |
-<%= link_to 'Back', shifts_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              shifts_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_shift_path(@shift), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              shift_path(@shift),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

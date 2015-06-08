@@ -1,45 +1,87 @@
-<%= form_for(@shift) do |f| %>
-  <% if @shift.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+<%= form_for @shift, :html => { :class => "form-horizontal shiftform" } do |f| %>
 
-      <ul>
-      <% @shift.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @shift.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@shift.errors.count, "error") %> prohibited this shift from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @shift.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :worker_id %><br>
-    <%= f.text_field :worker_id %>
+  <div class="form-group">
+    <%= f.label :worker_id, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.select :worker_id, options_from_collection_for_select(Worker.all,:id,:name,{}), {:include_blank => true},{:class=>"form-control"} %>
+    </div>
+    <%= error_span(@shift[:worker_id]) %>
   </div>
-  <div class="field">
-    <%= f.label :day_of_week %><br>
-    <%= f.number_field :day_of_week %>
+  
+  <div class="form-group">
+    <%= f.label :day_of_week, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.select :day_of_week, [["Monday",0],["Tuesday",1],["Wednesday",2],["Thursday",3],["Friday",4],["Saturday",5],["Sunday",6]],{:include_blank=>true},{:class => 'form-control'} %>
+    </div>
+    <%= error_span(@shift[:day_of_week]) %>
   </div>
-  <div class="field">
-    <%= f.label :monday %><br>
-    <%= f.date_select :monday %>
+  
+  <% if ! @shift.shift_template.nil? %>
+  <div class="form-group">
+    <%= f.label :shift_template, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.select :shift_template, ShiftTemplate.all, {:include_blank => true},{:class=>"form-control"} %>
+    </div>
+    <%= error_span(@shift[:shift_template_id]) %>
   </div>
-  <div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.text_field :start_time %>
+  <% else %>
+  
+  <div class="form-group">
+    <%= f.label "Week starting on Monday the...", :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.select :monday, getsomemondays(@shift.monday),{:include_blank=>true},{:class => 'form-control'} %>
+    </div>
+    <%= error_span(@shift[:monday]) %>
   </div>
-  <div class="field">
-    <%= f.label :end_time %><br>
-    <%= f.text_field :end_time %>
+  <% end %>
+  
+  <div class="form-group">
+    <%= f.label :start_time, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.text_field :start_time, :class => 'form-control timepicker' %>
+    </div>
+    <%= error_span(@shift[:start_time]) %>
   </div>
-  <div class="field">
-    <%= f.label :task_id %><br>
-    <%= f.text_field :task_id %>
+  <div class="form-group">
+    <%= f.label :end_time, :class => 'control-label col-md-4 ' %>
+    <div class="controls col-md-8">
+      <%= f.text_field :end_time, :class => 'form-control timepicker' %>
+    </div>
+    <%= error_span(@shift[:end_time]) %>
   </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
+  <div class="form-group">
+    <%= f.label :task_id, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.select :task_id, options_from_collection_for_select(Task.all,:id,:name,{}), {:include_blank => true},{:class=>"form-control"} %>
+    </div>
+    <%= error_span(@shift[:task_id]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@shift[:description]) %>
+  </div>
+
+  <div class="col-md-8 col-md-offset-4">
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            shifts_path, :class => 'btn btn-default' %>
   </div>
 <% end %>

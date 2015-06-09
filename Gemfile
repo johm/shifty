@@ -56,3 +56,4 @@ gem 'jquery-timepicker-rails'
 gem "devise", ">= 2.2.3"
 gem "cancancan"
 gem "rolify"
+gem "figaro"

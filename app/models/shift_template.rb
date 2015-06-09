@@ -1,4 +1,5 @@
 class ShiftTemplate < ActiveRecord::Base
+
   has_many :shifts
 
   def apply_to_monday(monday)

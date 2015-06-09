@@ -48,6 +48,7 @@
         <a class="navbar-brand" href="/">Shifty</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
+	    <% if can? :edit, Shift  %>
             <li><%= link_to "This week", "/"  %></li>
 	    <li role="presentation" class="dropdown">
 	      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -66,7 +67,7 @@
 		<% monday=Date.today.beginning_of_week - x.weeks %>
 		<li><a><%= link_to monday, "/weeks/#{monday}"  %></a></li>
 		<% end %>
-
+		
 	      </ul>
 	    </li>
 	    
@@ -86,6 +87,27 @@
             <li><%= link_to "Workers", "/workers"  %></li>
             <li><%= link_to "Workgroups", "/workgroups"  %></li>
             <li><%= link_to "Shift report", "/shifts/report"  %></li>
+	    <% end %>
+	    <% if user_signed_in? %>
+	    <li>
+	      <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+	    </li>
+	    <% else %>
+	    <li>
+	      <%= link_to 'Login', new_user_session_path %>
+	    </li>
+	    <% end %>
+	    <% if user_signed_in? %>
+	    <li>
+	      <%= link_to 'Edit account', edit_user_registration_path %>
+	    </li>
+	    <% if current_user.has_role? :admin %>
+	    <li>
+	      <%= link_to 'Admin', users_path %>
+	    </li>
+	    <% end %>
+	    <% end %>
+
           </ul>
         </div>
       </div>

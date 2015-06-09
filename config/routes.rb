@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :week_notes
   resources :transactions
   resources :shift_templates
@@ -37,6 +38,11 @@ Rails.application.routes.draw do
   root 'weeks#current'
   get 'weeks/:monday' => 'weeks#show'
   post 'weeks/:monday/apply_shift_template' => 'weeks#apply_shift_template'
+
+
+
+  resources :users
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

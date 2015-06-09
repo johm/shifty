@@ -1,6 +1,7 @@
 class ShiftsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_shift, only: [:show, :edit, :update, :destroy,:colorfix]
-
+  load_and_authorize_resource
   # GET /shifts
   # GET /shifts.json
   def index

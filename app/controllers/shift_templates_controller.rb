@@ -1,6 +1,7 @@
 class ShiftTemplatesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_shift_template, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /shift_templates
   # GET /shift_templates.json
   def index

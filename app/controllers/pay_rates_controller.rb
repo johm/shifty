@@ -1,6 +1,7 @@
 class PayRatesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_pay_rate, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /pay_rates
   # GET /pay_rates.json
   def index

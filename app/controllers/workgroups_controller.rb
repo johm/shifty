@@ -1,6 +1,7 @@
 class WorkgroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_workgroup, only: [:show, :edit, :update, :destroy,:report]
-
+  load_and_authorize_resource
   # GET /workgroups
   # GET /workgroups.json
   def index

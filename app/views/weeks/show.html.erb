@@ -1,3 +1,4 @@
+<% if Ability.new(current_user).can? :read,Shift %> 
 <style type="text/css">
   <% Worker.all.each do |w| %>
   .shift.shiftworker-<%= w.id %>, .shift.shiftworker-<%= w.id %> a {
@@ -164,4 +165,5 @@ Shift template: <%= @shift_template.name %> <br />
 
 
 
+<% end %>
 <% end %>

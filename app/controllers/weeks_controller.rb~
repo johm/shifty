@@ -1,6 +1,0 @@
-class WeeksController < ApplicationController
-
-  def current
-  end
-
-end

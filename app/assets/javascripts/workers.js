@@ -1,10 +1,11 @@
 $(document).on('nested:fieldAdded', function(event){
     // this field was just inserted into your form
     $(".datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
-  })
+  });
 
 
 $( document ).ready(function() {
+    $(".checkbox").bootstrapSwitch();
     $(".colorpicker").minicolors({theme: "bootstrap"});
     $(".datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
     $('[data-toggle="tooltip"]').tooltip()

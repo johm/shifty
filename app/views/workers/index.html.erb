@@ -8,15 +8,17 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:mobile) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:active) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @workers.each do |worker| %>
-      <tr>
+      <tr class="<%= 'success' if worker.active %>" >
         <td><%= link_to worker.name,worker %></td>
         <td><%= worker.mobile %></td>
         <td><%= worker.email %></td>
+        <td><%= worker.active ? "Active" : "Inactive" %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_worker_path(worker), :class => 'btn btn-default btn-xs' %>

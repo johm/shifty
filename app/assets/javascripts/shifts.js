@@ -18,13 +18,8 @@ $(document).ready(function(){
     $(".shift").each(function(){makeshiftresizable($(this))});
     $("body").on("click",".shiftedit",function(){
 	$(this).parent().find(".shiftdescription").toggle(); //doesn't work for new elements 
+	return false;
     });
-
-
-
-//    $("body").on("click",".shift",function(event){
-//
-//    });
 
 });
 

@@ -63,7 +63,7 @@
 		<% end %>
 		<li class="disabled"><a><br />Recent</a></li>
 		<li role="presentation" class="divider"></li>
-		<% (1..8).each do |x| %>
+		<% (1..200).each do |x| %>
 		<% monday=Date.today.beginning_of_week - x.weeks %>
 		<li><a><%= link_to monday, "/weeks/#{monday}"  %></a></li>
 		<% end %>

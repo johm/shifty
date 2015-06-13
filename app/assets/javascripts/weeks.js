@@ -11,9 +11,7 @@ $(document).ready(function(){
 	}
     });
     
-    $(".task-target").on("click",function(event){
-	
-
+    $(".task-target").on("dblclick",function(event){
 	
 	if (! $(document.elementFromPoint(event.pageX,event.pageY)).hasClass("shift")) {
 	    task_id=$(this).data("task-target");

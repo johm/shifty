@@ -19,4 +19,5 @@
 //= require jquery_nested_form
 //= require best_in_place
 //= require jquery.timepicker.js
+//= require bootstrap-switch
 //= require_tree .

@@ -110,6 +110,7 @@ Shift template: <%= @shift_template.name %> <br />
 <% end %>
 
 
+<% if !@monday.nil? %>
 <div class="well">
   <h3>Notes</h3>
   <div id="week_notes">
@@ -142,7 +143,7 @@ Shift template: <%= @shift_template.name %> <br />
   <% end %>
     
 </div>
-
+<% end %>
 <%= content_for :sidebar do %>
 <a class="btn btn-info  btn-xs" id="toggledescriptions" role="button"><i class="fa fa-edit"></i> Toggle descriptions</a>
 <h3>Workgroups</h3>
@@ -156,7 +157,16 @@ Shift template: <%= @shift_template.name %> <br />
 
 <h3>Workers</h3>
 <ul id="workerlist">
-<% Worker.all.each do |worker| %>
+<% Worker.where(:active => true,:utility=>[false,nil]).each do |worker| %>
+<li>
+  <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"       style="color:<%= worker.foreground %>;background-color:<%= worker.background %>"  data-toggle="tooltip" data-placement="bottom" title="<%= escape_javascript(worker.notes) %>" ><%= worker.name %></a>
+</li>
+<% end %>
+</ul>
+
+<h3>"Utility" shifts</h3>
+<ul id="utilitylist">
+<% Worker.where(:active => true,:utility=>true).each do |worker| %>
 <li>
   <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"       style="color:<%= worker.foreground %>;background-color:<%= worker.background %>"  data-toggle="tooltip" data-placement="bottom" title="<%= escape_javascript(worker.notes) %>" ><%= worker.name %></a>
 </li>

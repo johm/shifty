@@ -59,6 +59,25 @@
       </div>
       <%= error_span(@worker[:background]) %>
     </div>
+
+
+    <div class="control-group">
+      <%= f.label :active, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.check_box :active, :class => 'form-control checkbox' %>
+      </div>
+      <%= error_span(@worker[:active]) %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :utility_only, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.check_box :utility, :class => 'form-control checkbox' %>
+      </div>
+      <%= error_span(@worker[:utility]) %>
+    </div>
+
+
     </div>
     <div class="col-sm-6">
     <div class="control-group">

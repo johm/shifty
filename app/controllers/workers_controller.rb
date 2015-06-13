@@ -5,7 +5,7 @@ class WorkersController < ApplicationController
   # GET /workers
   # GET /workers.json
   def index
-    @workers = Worker.all
+    @workers = Worker.all.where(:utility => [nil,false])
   end
 
   # GET /workers/1
@@ -91,6 +91,6 @@ class WorkersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def worker_params
-      params.require(:worker).permit(:firstname, :lastname, :mobile, :email, :foreground, :background, :notes,{:workgroup_ids => []},:pay_rates_attributes=>[:id,:effective,:hourly_pay,:hourly_capital_contribution,:hourly_predicted_extra_wage])
+      params.require(:worker).permit(:firstname, :lastname, :mobile, :email, :foreground, :background, :notes,:active,:utility,{:workgroup_ids => []},:pay_rates_attributes=>[:id,:effective,:hourly_pay,:hourly_capital_contribution,:hourly_predicted_extra_wage])
     end
 end

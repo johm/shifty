@@ -4,6 +4,7 @@ class Worker < ActiveRecord::Base
   has_many :shifts
   has_many :transactions
   has_many :pay_rates
+  default_scope {includes(:pay_rates).order(:firstname)}
 
   accepts_nested_attributes_for :pay_rates
 

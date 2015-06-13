@@ -11,6 +11,11 @@
   <dd><%= @worker.mobile %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
   <dd><%= @worker.email %></dd>
+  <dt><strong>Is just for "utility" shifts?:</strong></dt>
+  <dd><%= @worker.utility %></dd>
+  <dt><strong>Is an active worker:</strong></dt>
+  <dd><%= @worker.active %></dd>
+  
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

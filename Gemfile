@@ -59,4 +59,4 @@ gem "cancancan"
 gem "rolify"
 gem "figaro"
 gem "bootstrap-switch-rails"
-    
+gem 'jquery-turbolinks'    

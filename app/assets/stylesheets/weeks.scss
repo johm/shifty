@@ -33,7 +33,10 @@
     left:20px;
 //    width:30px;
     transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);	
+    -webkit-transform-origin: left top 0;
     transform-origin: left top 0;
+    
  }
 
 .col-with-flat-label {

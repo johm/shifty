@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-ui
+//= require jquery.ui.touch-punch
 //= require jquery.minicolors
 //= require jquery_nested_form
 //= require best_in_place

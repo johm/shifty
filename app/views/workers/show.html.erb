@@ -7,6 +7,10 @@
 <div class="row">
 <div class="col-sm-6">
 <dl class="dl-horizontal" >
+  <dt><strong>Last initial:</strong></dt>
+  <dd><%= @worker.last_initial %></dd>
+  <dt><strong>Preferred pronouns:</strong></dt>
+  <dd><%= @worker.pronoun %></dd>
   <dt><strong><%= model_class.human_attribute_name(:mobile) %>:</strong></dt>
   <dd><%= @worker.mobile %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>

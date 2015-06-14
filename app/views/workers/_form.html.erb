@@ -32,6 +32,20 @@
       <%= error_span(@worker[:lastname]) %>
     </div>
     <div class="control-group">
+      <%= f.label :last_initial, :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :last_initial, :class => 'form-control' %>
+      </div>
+      <%= error_span(@worker[:last_initial]) %>
+    </div>
+    <div class="control-group">
+      <%= f.label "Preferred pronoun", :class => 'control-label' %>
+      <div class="controls">
+	<%= f.text_field :pronoun, :class => 'form-control' %>
+      </div>
+      <%= error_span(@worker[:pronoun]) %>
+    </div>
+    <div class="control-group">
       <%= f.label :mobile, :class => 'control-label' %>
       <div class="controls">
 	<%= f.text_field :mobile, :class => 'form-control' %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611221317) do
+ActiveRecord::Schema.define(version: 20150614160701) do
 
   create_table "pay_rates", force: :cascade do |t|
     t.integer  "worker_id"
@@ -124,11 +124,13 @@ ActiveRecord::Schema.define(version: 20150611221317) do
     t.string   "email"
     t.string   "foreground"
     t.string   "background"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.text     "notes"
     t.boolean  "active"
     t.boolean  "utility"
+    t.string   "pronoun"
+    t.string   "last_initial"
   end
 
   create_table "workgroup_memberships", force: :cascade do |t|

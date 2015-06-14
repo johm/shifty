@@ -117,3 +117,12 @@ td.grayed, th.grayed {
 	background-color: #f5f5f5;
 	color:#666;  
 }
+
+
+
+@media(max-width:767px){
+	.time-ticks .col-30min {
+	font-size:6px;
+	}		    
+
+}

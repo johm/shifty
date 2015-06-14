@@ -8,8 +8,8 @@
   <i class="fa fa-heart"></i>
   <%= best_in_place shift,:worker_id,
       :as=>:select,
-  :display_with => lambda {|w| Worker.find(w).name},
-  :collection=>shift.workgroup.workers.collect {|s| [s.id,s.name]} + Worker.all.find_all {|x| ! shift.workgroup.workers.include? x}.collect {|s| [s.id,s.name]}  ,
+  :display_with => lambda {|w| Worker.find(w).shortname},
+  :collection=>shift.workgroup.workers.collect {|s| [s.id,s.shortname]} + Worker.all.find_all {|x| x.active && (! shift.workgroup.workers.include? x)}.collect {|s| [s.id,s.shortname]} + Worker.all.find_all {|x| (! x.active) && (! shift.workgroup.workers.include? x)}.collect {|s| [s.id,s.shortname]} ,
   :class=>"shiftworkerpicker" %>
   <span class="shift-start-time"><%= shift.start_time.strftime("%l:%M") %></span> 
   -   

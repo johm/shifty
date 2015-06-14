@@ -5,15 +5,19 @@ class Worker < ActiveRecord::Base
   has_many :transactions
   has_many :pay_rates
   default_scope {includes(:pay_rates).order(:firstname)}
-
+  validates :pronoun, :presence=> {:message=>"No cisnormativity. Be explicit!"}
   accepts_nested_attributes_for :pay_rates
 
   def name 
     "#{firstname} #{lastname}"
   end
 
+  def shortname 
+    "#{firstname} #{last_initial}"
+  end
+
   def to_s 
-    name
+    shortname
   end
 
   def capital_account_balance(on_date)

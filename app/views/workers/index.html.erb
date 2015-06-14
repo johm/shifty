@@ -6,6 +6,8 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th>Last initial</th>
+      <th>Preferred pronouns</th>
       <th><%= model_class.human_attribute_name(:mobile) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:active) %></th>
@@ -16,6 +18,8 @@
     <% @workers.each do |worker| %>
       <tr class="<%= 'success' if worker.active %>" >
         <td><%= link_to worker.name,worker %></td>
+	<td><%= worker.last_initial %></td>
+	<td><%= worker.pronoun %></td>
         <td><%= worker.mobile %></td>
         <td><%= worker.email %></td>
         <td><%= worker.active ? "Active" : "Inactive" %></td>

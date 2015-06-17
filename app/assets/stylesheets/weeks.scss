@@ -2,6 +2,7 @@
 
 .day_of_week {
     min-height:100px !important;
+    margin-bottom:15px !important;
 }
 
 @for $i from 1 through 32 {                                                                                                                                
@@ -60,17 +61,18 @@
 
 
 .task {
-    border-bottom:1px dashed #ccc;
+    border-bottom:1px dashed #666;
+    border-left:1px solid #666;
     padding-top:2px;
     padding-bottom:2px;
  }
 
 .task:last-child {
-    border-bottom:0px dashed #ccc;
+    border-bottom:0px dashed #666;
  }
 
 .task:first-child {
-    border-bottom:1px dashed #ccc;
+    border-bottom:1px dashed #666;
  }
 
 

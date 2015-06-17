@@ -1,3 +1,70 @@
 // Place all the styles related to the Tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+$colour1: rgb(220,220,255); // blue
+$colour2: rgb(255,220,220); // red
+$colour3: rgb(200,255,200); // green
+$colour4: rgb(255,235,190);   // yellow
+$colour5: rgb(255,200,255); 
+$colour6: rgb(200,255,255);   
+
+
+$colors: $colour1, $colour2, $colour3, $colour4,$colour5,$colour6;
+
+@for $i from 1 through length($colors) {
+    
+    
+
+    .workgrouprow:nth-child(#{$i}) {
+	background-color: nth($colors, $i);
+	.task {.workgrouplabel {
+	          border-right:1px solid #666;
+		  
+	background-color:rgba(nth($colors,$i),.5)}}
+
+	.task:nth-child(2) {
+	    background:
+	    radial-gradient(nth($colors, $i) 15%, transparent 16%) 0 0,
+		radial-gradient(nth($colors, $i) 15%, transparent 16%) 8px 8px;
+	    background-color:#ffffff;
+	    background-size:16px 16px;
+
+	}
+
+	.task:nth-child(3) {
+	    background-color:#fff;
+background-image: linear-gradient(45deg, nth($colors, $i) 25%, transparent 25%, transparent 75%, nth($colors, $i) 75%, nth($colors, $i)), 
+linear-gradient(45deg, nth($colors, $i) 25%, transparent 25%, transparent 75%, nth($colors, $i) 75%, nth($colors, $i));
+background-size:10px 10px;
+background-position:0 0, 5px 5px 
+		/* slashes
+	    background: 
+	    linear-gradient(63deg, #fff 23%, transparent 23%) 7px 0, 
+		linear-gradient(63deg, transparent 74%, #fff 78%), 
+		linear-gradient(63deg, transparent 34%, #fff 38%, #fff 58%, transparent 62%), 
+		nth($colors, $i);
+		background-size: 16px 48px; */
+	}
+
+	.task:nth-child(1){
+	    /* triangles	    background: 
+	    linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
+		linear-gradient(245deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
+		linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 7px -15px,
+		linear-gradient(245deg, transparent 75%, rgba(255,255,255,.8) 75%) 7px -15px,
+		nth($colors, $i);
+		background-size: 15px 30px */
+	    background-color:#fff;
+	    background-image: repeating-linear-gradient(135deg, rgba(nth($colors, $i),1), rgba(nth($colors, $i),1) 1px, transparent 2px, transparent 2px, rgba(nth($colors, $i),1) 3px);
+  -webkit-background-size: 4px 4px;
+	}
+
+	
+
+    }
+}
+

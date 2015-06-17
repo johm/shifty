@@ -31,8 +31,10 @@ Shift template: <%= @shift_template.name %> <br />
 <div class="col-with-label" style="margin-left:5px;">
   <div class="col-content"> 
     <div class="col-with-label">
+  <div class="col-label time">
+  </div>
       <div class="col-content"> 
-	<div class="col-with-flat-label">
+	<div class="col-with-flat-label hours">
 	  <div class="col-content time-ticks"> 
 	    <% (0..31).each do |i| %> 
 	    
@@ -159,7 +161,7 @@ Shift template: <%= @shift_template.name %> <br />
 <ul id="workerlist">
 <% Worker.where(:active => true,:utility=>[false,nil]).each do |worker| %>
 <li>
-  <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"       style="color:<%= worker.foreground %>;background-color:<%= worker.background %>"  data-toggle="tooltip" data-placement="bottom" title="<%= escape_javascript(worker.notes) %>" ><%= worker.shortname %></a>
+  <a href="#" class="worker_draggable" data-worker="<%= worker.id %>"       style="color:<%= worker.foreground %>;background-color:<%= worker.background %>"  data-toggle="tooltip" data-placement="bottom" title="<%= escape_javascript(worker.notes) %>" ><%= worker.name %></a>
 </li>
 <% end %>
 </ul>

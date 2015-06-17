@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    $(".task").each(function(){
+	$(this).find(".workgrouplabel").height($(this).height()+4);
+    });
+
     $("#toggledescriptions").on("click",function(){
 	if ($(this).hasClass("active")){
 	    $(this).removeClass("active");

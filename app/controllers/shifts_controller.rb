@@ -27,7 +27,12 @@ class ShiftsController < ApplicationController
 
   # GET /shifts/new
   def new
-    @shift = Shift.new
+    @shift = Shift.new(shift_params)
+    puts "TASK WAS #{@shift.task_id}"
+    respond_to do |format|
+      format.html.erb
+      format.js {}
+    end
   end
 
   # GET /shifts/1/edit

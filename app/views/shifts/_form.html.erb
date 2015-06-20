@@ -1,4 +1,4 @@
-<%= form_for @shift, :html => { :class => "form-horizontal shiftform" } do |f| %>
+<%= form_for @shift, :html => { :class => "form-horizontal shiftform" }, :remote=>true do |f| %>
 
     <% if @shift.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -23,6 +23,42 @@
     <%= error_span(@shift[:worker_id]) %>
   </div>
   
+  <div class="form-group">
+    <%= f.label :start_time, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.text_field :start_time, :class => 'form-control timepicker' %>
+    </div>
+    <%= error_span(@shift[:start_time]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_time, :class => 'control-label col-md-4 ' %>
+    <div class="controls col-md-8">
+      <%= f.text_field :end_time, :class => 'form-control timepicker' %>
+    </div>
+    <%= error_span(@shift[:end_time]) %>
+  </div>
+  <div class="col-md-8 col-md-offset-4">
+  <%= f.submit nil, :class => 'btn btn-primary' %> <br /> </br/>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@shift[:description]) %>
+  </div>
+
+
+
+  <div class="form-group">
+    <%= f.label :task_id, :class => 'control-label col-md-4' %>
+    <div class="controls col-md-8">
+      <%= f.collection_select(:task_id, Task.all, :id, :name, {:include_blank => true},{:class=>"form-control"}) %>
+    </div>
+    <%= error_span(@shift[:task_id]) %>
+  </div>
+
   <div class="form-group">
     <%= f.label :day_of_week, :class => 'control-label col-md-4' %>
     <div class="controls col-md-8">
@@ -50,38 +86,7 @@
   </div>
   <% end %>
   
-  <div class="form-group">
-    <%= f.label :start_time, :class => 'control-label col-md-4' %>
-    <div class="controls col-md-8">
-      <%= f.text_field :start_time, :class => 'form-control timepicker' %>
-    </div>
-    <%= error_span(@shift[:start_time]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :end_time, :class => 'control-label col-md-4 ' %>
-    <div class="controls col-md-8">
-      <%= f.text_field :end_time, :class => 'form-control timepicker' %>
-    </div>
-    <%= error_span(@shift[:end_time]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :task_id, :class => 'control-label col-md-4' %>
-    <div class="controls col-md-8">
-      <%= f.select :task_id, options_from_collection_for_select(Task.all,:id,:name,{}), {:include_blank => true},{:class=>"form-control"} %>
-    </div>
-    <%= error_span(@shift[:task_id]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description, :class => 'control-label col-md-4' %>
-    <div class="controls col-md-8">
-      <%= f.text_field :description, :class => 'form-control' %>
-    </div>
-    <%= error_span(@shift[:description]) %>
-  </div>
 
-  <div class="col-md-8 col-md-offset-4">
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            shifts_path, :class => 'btn btn-default' %>
-  </div>
+
+
 <% end %>

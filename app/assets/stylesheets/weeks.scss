@@ -3,6 +3,7 @@
 .day_of_week {
     min-height:100px !important;
     margin-bottom:15px !important;
+    background-color:#f6f6f6;
 }
 
 @for $i from 1 through 32 {                                                                                                                                
@@ -131,3 +132,5 @@ td.grayed, th.grayed {
 	}		    
 
 }
+
+

@@ -67,7 +67,9 @@ Shift template: <%= @shift_template.name %> <br />
 	
 	<% workgroup.tasks.each do |task| %>
 	<div class="col-with-flat-label task task_<%= task.id%>">
-	  <div class="col-label"><div class="workgrouplabel"><%= task.name %></div></div>
+	  <div class="col-label"><div class="workgrouplabel">
+	      <%= link_to task.name,new_shift_path(:shift=>{:monday=>@monday,:day_of_week=>day_of_week_i,:task_id=>task.id}),:remote => true, "data-toggle" => "modal", "data-target" => "#my-modal"  %>
+	  </div></div>
 	  <div class="col-content task-target" data-task-target="<%= task.id%>" data-task-workgroup="<%= workgroup.id%>" data-dayofweek-target="<%= day_of_week_i %>" data-monday-target="<%= @monday %>" data-shift-template-target="<%= @shift_template.id rescue '' %>" >
 	    <% @shifts.select {|s| s.task_id == task.id && s.day_of_week==day_of_week_i}.each do |shift| %>
 	    
@@ -146,6 +148,22 @@ Shift template: <%= @shift_template.name %> <br />
     
 </div>
 <% end %>
+
+<div class="modal fade" id="my-modal" title="My modal">
+  <div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+    <h3 id="myModalLabel">New Shift</h3>
+  </div>
+  <div class="modal-body shiftform">
+    New Post Body
+  </div>
+  <div class="modal-footer">
+    <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
+  </div>
+</div>
+
+
+
 <%= content_for :sidebar do %>
 <a class="btn btn-info  btn-xs" id="toggledescriptions" role="button"><i class="fa fa-edit"></i> Toggle descriptions</a>
 <h3>Workgroups</h3>
@@ -174,7 +192,6 @@ Shift template: <%= @shift_template.name %> <br />
 </li>
 <% end %>
 </ul>
-
 
 
 <% end %>

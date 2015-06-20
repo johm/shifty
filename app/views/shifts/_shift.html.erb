@@ -11,7 +11,7 @@
   :display_with => lambda {|w| Worker.find(w).shortname},
   :collection=>shift.workgroup.workers.collect {|s| [s.id,s.shortname]} + Worker.all.find_all {|x| x.active && (! shift.workgroup.workers.include? x)}.collect {|s| [s.id,s.shortname]} + Worker.all.find_all {|x| (! x.active) && (! shift.workgroup.workers.include? x)}.collect {|s| [s.id,s.shortname]} ,
   :class=>"shiftworkerpicker" %>
-  <span class="shift-start-time"><%= shift.start_time.strftime(shift.start_time.minutes==0 ? "%l" : "%l:%M") %></span>-<span class="shift-end-time"><%= shift.end_time.strftime(shift.end_time.minutes==0 ? "%l" : "%l:%M") %></span> 
+  <span class="shift-start-time"><%= shift.start_time.strftime(shift.start_time.strftime("%M")=="00" ? "%l" : "%l:%M") %></span>-<span class="shift-end-time"><%= shift.end_time.strftime(shift.end_time.strftime("%M")=="00" ? "%l" : "%l:%M") %></span> 
 
   <div class="shiftdescription" style="display:none;">
     <%= best_in_place shift, :description, :place_holder => "click to describe this shift" %>

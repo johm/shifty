@@ -47,7 +47,7 @@
   </tr>
   <% end %>
   <tr><th class="grayed" colspan="6">By worker</th></tr>
-  <% @shifts.collect {|x| x.worker}.uniq.each do |w| %>
+  <% @shifts.collect {|x| x.worker}.sort_by {|w| w.firstname}.uniq.each do |w| %>
   <tr>
     <td><%= link_to w.name,w %></td>
     <td><%= @shifts.where(:worker=>w).inject(0){|sum,s| sum+s.hours_long } %></td>

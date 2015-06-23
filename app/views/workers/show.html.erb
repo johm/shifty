@@ -115,13 +115,14 @@ new_transaction_path(:worker_id=>@worker),:class => 'btn btn-primary' %>
 <h3>Capital Account</h3>
 Balance: $<%= @worker.capital_account_balance(Date.today) %>
 <h3>Upcoming shifts</h3>
-<% @worker.shifts.where(:shift_template_id=>nil).where("monday >= ?", Date.today.beginning_of_week).each do |s| %>
+<table class="table table-condensed">
+<% @worker.shifts.where(:shift_template_id=>nil).where("monday >= ?", Date.today.beginning_of_week).order('monday asc,day_of_week asc,start_time asc').each do |s| %>
 
-<div>
-<a href="/weeks?monday=<%= s.monday%>">
-  <%= link_to s.date.strftime("%-m/%-d"),"/weeks/#{s.monday}" %>: <%= s.task.name %> <%= s.start_time.strftime("%l:%M%p") %> -  <%= s.end_time.strftime("%l:%M%p") %>
-</a>
-</div>
+<tr>
+
+  <th><%= link_to s.date.strftime("%-m/%-d"),"/weeks/#{s.monday}" %></th> <td><%= s.task.name %></td><td><%= s.start_time.strftime("%l:%M%p") %> -  <%= s.end_time.strftime("%l:%M%p") %></td>
+
+</tr>
 
 <% end %>
 <% end %>

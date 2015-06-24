@@ -71,7 +71,7 @@ Shift template: <%= @shift_template.name %> <br />
 	      <%= link_to task.name,new_shift_path(:shift=>{:monday=>@monday,:day_of_week=>day_of_week_i,:task_id=>task.id}),:remote => true, "data-toggle" => "modal", "data-target" => "#my-modal"  %>
 	  </div></div>
 	  <div class="col-content task-target" data-task-target="<%= task.id%>" data-task-workgroup="<%= workgroup.id%>" data-dayofweek-target="<%= day_of_week_i %>" data-monday-target="<%= @monday %>" data-shift-template-target="<%= @shift_template.id rescue '' %>" >
-	    <% @shifts.select {|s| s.task_id == task.id && s.day_of_week==day_of_week_i}.each do |shift| %>
+	    <% @shifts.select {|s| s.task_id == task.id && s.day_of_week==day_of_week_i}.sort_by {|s| s.start_time}.each do |shift| %>
 	    
 	    <%= render shift %>
 	    

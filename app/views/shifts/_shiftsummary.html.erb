@@ -1,6 +1,6 @@
 <table class="table" id="shiftsummary">
   <tr><th>Worker</th><th>Hours worked</th><th>Hourly pay</th><th>Capital Contributions</th><th>Predicted extra wage</th></tr>
-<% shifts_to_summary(shifts).each do |k,v|  %>
+<% shifts_to_summary(shifts).sort_by {|k,v| k}.collect {|x| x[1]}.each do |v|  %>
 <% unless v[:worker].utility %>
 <tr> 
   <td><%= link_to v[:worker].name,v[:worker] %></td>

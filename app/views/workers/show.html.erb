@@ -114,6 +114,8 @@ new_transaction_path(:worker_id=>@worker),:class => 'btn btn-primary' %>
 <%= best_in_place @worker, :notes, :place_holder => "click to add" %>
 <h3>Capital Account</h3>
 Balance: $<%= @worker.capital_account_balance(Date.today) %>
+<h3>Total hours worked to date</h3>
+Hours: <%= @worker.hours_worked_to_date(Date.today) %>
 <h3>Upcoming shifts</h3>
 <table class="table table-condensed">
 <% @worker.shifts.where(:shift_template_id=>nil).where("monday >= ?", Date.today.beginning_of_week).order('monday asc,day_of_week asc,start_time asc').each do |s| %>

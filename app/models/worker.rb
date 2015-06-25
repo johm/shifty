@@ -26,7 +26,7 @@ class Worker < ActiveRecord::Base
   end
 
   def hours_worked_to_date(on_date)
-    shifts.where(:shift_template_id=>nil).where("monday <= ?",on_date).inject(0) {|sum,s| sum+s.hours_long } + 
+    shifts.where(:shift_template_id=>nil).where("monday <= ?",on_date).inject(0) {|sum,s| sum+s.hours_long } 
   end
 
 

@@ -61,3 +61,5 @@ gem "rolify"
 gem "figaro"
 gem "bootstrap-switch-rails"
 gem "touchpunch-rails"
+
+gem "bullet", :group => "development"

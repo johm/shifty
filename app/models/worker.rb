@@ -21,12 +21,12 @@ class Worker < ActiveRecord::Base
   end
 
   def capital_account_balance(on_date)
-    shifts.where(:shift_template_id=>nil).where("monday <= ?",on_date).inject(Money.new(0)) {|sum,s| sum+s.total_hourly_capital_contribution }
-    #should also account for initial balance, lump contributions and distributions
+    shifts.where(:shift_template_id=>nil).where("monday <= ?",on_date).inject(Money.new(0)) {|sum,s| sum+s.total_hourly_capital_contribution } +      
+      transactions.where("date_made <= ?", on_date).inject(0) {|sum,t| sum + (t.amount * (t.transactiontype == "contribution" ? 1 : -1))}
   end
 
   def hours_worked_to_date(on_date)
-    shifts.where(:shift_template_id=>nil).where("monday <= ?",on_date).inject(0) {|sum,s| sum+s.hours_long }
+    shifts.where(:shift_template_id=>nil).where("monday <= ?",on_date).inject(0) {|sum,s| sum+s.hours_long } + 
   end
 
 

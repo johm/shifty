@@ -14,6 +14,8 @@ class Ability
         can :manage, WeekNote
         can :manage, WorkgroupMembership
         can :read, Transaction
+        can :read, Milestone
+        can :read, MilestoneAbility
         can :manage, Worker
         can :read, Workgroup
         can :read, PayRate

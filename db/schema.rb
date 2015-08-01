@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614160701) do
+ActiveRecord::Schema.define(version: 20150730122556) do
+
+  create_table "milestone_accomplishments", force: :cascade do |t|
+    t.integer  "milestone_id"
+    t.integer  "worker_id"
+    t.date     "date"
+    t.text     "notes"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "milestone_accomplishments", ["milestone_id"], name: "index_milestone_accomplishments_on_milestone_id"
+  add_index "milestone_accomplishments", ["worker_id"], name: "index_milestone_accomplishments_on_worker_id"
+
+  create_table "milestones", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "pay_rates", force: :cascade do |t|
     t.integer  "worker_id"

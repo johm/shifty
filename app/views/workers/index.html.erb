@@ -11,6 +11,7 @@
       <th><%= model_class.human_attribute_name(:mobile) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:active) %></th>
+      <th>Last milestone hit</th>
       <th>Hours worked to date</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -24,6 +25,7 @@
         <td><%= worker.mobile %></td>
         <td><%= worker.email %></td>
         <td><%= worker.active ? "Active" : "Inactive" %></td>
+	<td><%= worker.milestone_accomplishments.last.milestone.name rescue "" %></td>
         <td><%= worker.hours_worked_to_date(Date.today)  %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

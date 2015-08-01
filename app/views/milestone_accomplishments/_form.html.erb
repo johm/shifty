@@ -1,0 +1,57 @@
+<%= form_for @milestone_accomplishment, :html => { :class => "form-horizontal milestone_accomplishment" } do |f| %>
+
+    <% if @milestone_accomplishment.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@milestone_accomplishment.errors.count, "error") %> prohibited this milestone_accomplishment from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @milestone_accomplishment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :date, :class => 'form-control datepicker' %>
+    </div>
+    <%= error_span(@milestone_accomplishment[:date]) %>
+  </div>
+
+
+
+  <div class="control-group">
+    <%= f.label :worker, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_select(:worker_id, Worker.all, :id, :name, {:include_blank => true},{:class=>"form-control"}) %>
+    </div>
+    <%= error_span(@milestone_accomplishment[:worker]) %>
+  </div>
+
+
+  <div class="control-group">
+    <%= f.label :milestone, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_select(:milestone_id, Milestone.all, :id, :name, {:include_blank => true},{:class=>"form-control"}) %>
+    </div>
+    <%= error_span(@milestone_accomplishment[:milestone]) %>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :notes, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :notes, :class => 'form-control' %>
+    </div>
+    <%= error_span(@milestone_accomplishment[:notes]) %>
+  </div>
+
+  <br />
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+
+<% end %>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  resources :milestones
   devise_for :users
+  resources :milestone_accomplishments
   resources :week_notes
   resources :transactions
   resources :shift_templates

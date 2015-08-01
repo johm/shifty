@@ -116,6 +116,22 @@ new_transaction_path(:worker_id=>@worker),:class => 'btn btn-primary' %>
 Balance: $<%= @worker.capital_account_balance(Date.today) %>
 <h3>Total hours worked to date</h3>
 Hours: <%= @worker.hours_worked_to_date(Date.today) %>
+<h3>Milestones</h3>
+<table class="table table-condensed">
+<% @worker.milestone_accomplishments.each do |m| %>
+<tr>
+<th><%= m.date.strftime("%-m/%-d/%-y") %></th>
+<td><%= link_to m.milestone.name,m.milestone,:title=>escape_javascript(m.notes) %>
+  <% if can? :edit,Milestone %>
+  <td><%= link_to raw("<i class='fa fa-edit'></i>"),edit_milestone_accomplishment_path(m) %></td>
+  <% end %>
+</td>
+</tr>
+<% end %>
+</table>
+<% if can? :edit,Milestone %>
+<%= link_to "New milestone",new_milestone_accomplishment_path(:milestone_accomplishment=>{:worker_id=>@worker.id}),:class=>"btn btn-success btn-mini" %>
+<% end %>
 <h3>Upcoming shifts</h3>
 <table class="table table-condensed">
 <% @worker.shifts.includes(:task).where(:shift_template_id=>nil).where("monday >= ?", Date.today.beginning_of_week).order('monday asc,day_of_week asc,start_time asc').each do |s| %>

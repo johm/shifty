@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  milestone_id: 
+  worker_id: 
+  date: 2015-07-30
+  notes: MyText
+
+two:
+  milestone_id: 
+  worker_id: 
+  date: 2015-07-30
+  notes: MyText

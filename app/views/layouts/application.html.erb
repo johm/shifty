@@ -102,6 +102,7 @@
 	      <%= link_to 'Edit account', edit_user_registration_path %>
 	    </li>
 	    <% if current_user.has_role? :admin %>
+	    <li><%= link_to 'Milestones',milestones_path %></li>
 	    <li>
 	      <%= link_to 'Admin', users_path %>
 	    </li>

@@ -1,2 +1,2 @@
 $("#shift-<%= @shift.id%>").hide("puff");
-$("#shiftsummary").html("<%= escape_javascript(render :partial=>"shifts/shiftsummary",:locals=>{:shifts=>@shift.shifts_this_week)}) %>");
+$("#shiftsummary").html("<%= escape_javascript(render :partial=>"shifts/shiftsummary",:locals=>{:shifts=>@shift.shifts_this_week}) %>");

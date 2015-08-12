@@ -83,6 +83,7 @@ function makeshiftdraggable(div){
 		if (pos >= $(this).offset().left && (pos < ($(this).offset().left + $(this).width()))){
 		    $(this).addClass("bg-success");
 		    the_draggable.data("start-time",$(this).data("start-time"));
+		    the_draggable.find('.shift-start-time').html("yo");
 		}
 		else {
 		    $(this).removeClass("bg-success");

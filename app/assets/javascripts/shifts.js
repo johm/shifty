@@ -37,11 +37,13 @@ function makeshiftresizable(div){
 		 if (left_pos >= $(this).offset().left && (left_pos < ($(this).offset().left + $(this).width()))){
 		     $(this).addClass("bg-success");
 		     the_resizable.data("start-time",$(this).data("start-time"));
+		     the_resizable.find('.shift-start-time').html($(this).data("start-time"));
  		 }
 		 else {
 		     if (right_pos >= $(this).offset().left && (right_pos < ($(this).offset().left + $(this).width()))){
 			 $(this).addClass("bg-success");
 			 the_resizable.data("end-time",$(this).data("start-time"));
+			 the_resizable.find('.shift-end-time').html($(this).next().data("start-time"));
 		     }
 		     else {
 			 $(this).removeClass("bg-success");
@@ -83,7 +85,7 @@ function makeshiftdraggable(div){
 		if (pos >= $(this).offset().left && (pos < ($(this).offset().left + $(this).width()))){
 		    $(this).addClass("bg-success");
 		    the_draggable.data("start-time",$(this).data("start-time"));
-		    the_draggable.find('.shift-start-time').html("yo");
+		    the_draggable.find('.shift-start-time').html($(this).data("start-time"));
 		}
 		else {
 		    $(this).removeClass("bg-success");

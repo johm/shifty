@@ -50,4 +50,12 @@ class Shift < ActiveRecord::Base
     total_hourly_pay+total_hourly_predicted_extra_wage+total_hourly_capital_contribution
   end
 
+  def shifts_this_week 
+    if shift_template.nil?
+      Shift.where(:monday => monday)
+    else
+      shift_template.shifts
+    end
+  end
+
 end

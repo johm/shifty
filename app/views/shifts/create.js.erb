@@ -2,7 +2,7 @@ $('#my-modal').modal('hide');
 $("#day_of_week_<%= @shift.day_of_week %>").find(".task_<%= @shift.task_id %> .task-target").append("<%= escape_javascript(render :partial=>"shifts/shift",:locals=>{:shift=>@shift}) %>");
 makeshiftdraggable($("#shift-<%= @shift.id %>"));
 makeshiftresizable($("#shift-<%= @shift.id %>"));
-$("#shiftsummary").html("<%= escape_javascript(render :partial=>"shifts/shiftsummary",:locals=>{:shifts=>Shift.where(:monday => @shift.monday)}) %>");
+$("#shiftsummary").html("<%= escape_javascript(render :partial=>"shifts/shiftsummary",:locals=>{:shifts=>@shift.shifts_this_week)}) %>");
 $(".time-ticks .col-30min").removeClass("bg-success");
 $(".task-target").removeClass("bg-success");
     $(".task").each(function(){

@@ -11,6 +11,7 @@ $( document ).ready(function() {
     $('[data-toggle="tooltip"]').tooltip()
     $(".mondaypicker").datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay: function(date){ return [date.getDay() == 1,""]} });
     $(".worker_draggable").each(function(){makedraggable($(this))});
+
     $( ".task-target" ).droppable({
 	accept: ".worker_draggable",
 	drop: function(event,ui){
@@ -33,7 +34,31 @@ $( document ).ready(function() {
 	over: function(event,ui){$(this).addClass("bg-success")},
 	out: function(event,ui){$(this).removeClass("bg-success")}
     });
+    togglelockweek();
+    $("#weeklock").on("click",togglelockweek);
 });
+
+function togglelockweek(){
+    if ($("#weeklock i").hasClass("fa-unlock")){
+	$(".ui-draggable").draggable("disable");
+	$(".ui-resizable").resizable("disable");
+	$("#weeklock i").removeClass("fa-unlock");
+	$("#weeklock i").addClass("fa-lock");
+	$(".shift .fa-trash-o").hide(200);
+	$(".shift .fa-edit").hide(200);
+	}
+    else {
+	$(".ui-draggable").draggable("enable");
+	$(".ui-resizable").resizable("enable");
+	$("#weeklock i").removeClass("fa-lock");
+	$("#weeklock i").addClass("fa-unlock");
+	$(".shift .fa-trash-o").show(200);
+	$(".shift .fa-edit").show(200);
+	}
+}
+
+
+
 
 
 function makedraggable(div){

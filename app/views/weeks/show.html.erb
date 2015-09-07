@@ -11,6 +11,7 @@
 </style>
 
 <h1 id="weekheader">
+  <a href="#" id="weeklock"><i class="fa fa-unlock"></i></a>
 <% unless @monday.nil? %>
   <a href="/weeks/<%= @monday-7.days %>"><i class="fa fa-arrow-left"></i></a>
   Week of: <%= @monday %>

@@ -5,9 +5,11 @@ class Worker < ActiveRecord::Base
   has_many :transactions
   has_many :pay_rates
   has_many :milestone_accomplishments
+  has_many :users
   default_scope {includes(:pay_rates).order(:firstname)}
   validates :pronoun, :presence=> {:message=>"No cisnormativity. Be explicit!"}
   accepts_nested_attributes_for :pay_rates
+
 
   def name 
     "#{firstname} #{lastname}"

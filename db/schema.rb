@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730122556) do
+ActiveRecord::Schema.define(version: 20160801114449) do
 
   create_table "milestone_accomplishments", force: :cascade do |t|
     t.integer  "milestone_id"
@@ -116,10 +116,12 @@ ActiveRecord::Schema.define(version: 20150730122556) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
+    t.integer  "worker_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["worker_id"], name: "index_users_on_worker_id"
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
@@ -150,6 +152,7 @@ ActiveRecord::Schema.define(version: 20150730122556) do
     t.boolean  "utility"
     t.string   "pronoun"
     t.string   "last_initial"
+    t.string   "secretslug"
   end
 
   create_table "workgroup_memberships", force: :cascade do |t|

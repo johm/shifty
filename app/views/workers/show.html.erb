@@ -143,4 +143,15 @@ Hours: <%= @worker.hours_worked_to_date(Date.today) %>
 </tr>
 
 <% end %>
+</table>
+
+<% if current_user.worker && @worker.id==current_user.worker.id %>
+
+<h3>Calendar URL</h3>
+
+<pre><%= link_to "https://redemmas.org/calendar/#{@worker.id}/#{@worker.secretslug}","/calendar/#{@worker.id}/#{@worker.secretslug}" %>
+</pre>
 <% end %>
+
+<% end %>
+

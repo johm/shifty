@@ -44,7 +44,8 @@ Rails.application.routes.draw do
 
 
   resources :users
-
+  get 'me' => 'workers#me'
+  get 'calendar/:id/:secretslug' => 'calendar#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

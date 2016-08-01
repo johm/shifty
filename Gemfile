@@ -61,5 +61,6 @@ gem "rolify"
 gem "figaro"
 gem "bootstrap-switch-rails"
 gem "touchpunch-rails"
+gem "icalendar"
 
 gem "bullet", :group => "development"

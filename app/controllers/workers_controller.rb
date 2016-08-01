@@ -18,6 +18,16 @@ class WorkersController < ApplicationController
     @worker = Worker.new
   end
 
+  def me 
+    respond_to do |format|
+      if current_user.worker 
+        format.html { redirect_to current_user.worker}
+      else 
+        format.html {render :index}
+      end
+    end
+  end
+
   def capital 
     @shifts=@worker.shifts.where(:shift_template_id => nil )
 

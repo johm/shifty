@@ -1,3 +1,5 @@
+require 'icalendar/tzinfo'
+
 
 class CalendarController < ApplicationController
   
@@ -6,10 +8,15 @@ class CalendarController < ApplicationController
     if @worker && params[:secretslug]==@worker.secretslug
       cal=Icalendar::Calendar.new
       
+      tzid="America/New_York"
+      tz=TZInfo::Timezone.get tzid
+      timezone = tz.ical_timezone DateTime.now
+      cal.add_timezone timezone
+
       @worker.shifts.includes(:task).where(:shift_template_id=>nil).where("monday >= ?", Date.today.beginning_of_week).order('monday asc,day_of_week asc,start_time asc').each do |s|
         cal.event do |e|
-          e.dtstart = s.date+ ((s.start_time.strftime("%H").to_i * 3600) + (s.start_time.strftime("%M").to_i * 60)).seconds
-          e.dtend = s.date+ ((s.end_time.strftime("%H").to_i * 3600) + (s.end_time.strftime("%M").to_i * 60)).seconds
+          e.dtstart = Icalendar::Values::DateTime.new (s.date+ ((s.start_time.strftime("%H").to_i * 3600) + (s.start_time.strftime("%M").to_i * 60)).seconds), :tzid => tzid
+          e.dtend =  Icalendar::Values::DateTime.new (s.date+ ((s.end_time.strftime("%H").to_i * 3600) + (s.end_time.strftime("%M").to_i * 60)).seconds), :tzid => tzid
           e.location = "Red Emma's"
           e.summary = "Shift: #{s.task.name}"
           e.description = "Shift"

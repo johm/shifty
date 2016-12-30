@@ -17,8 +17,18 @@ background-color:rgba(255,255,255,0.8);
 	float:right;
 	font-size:16px;
 	margin-left:3px;
+	padding:2px;
+	border-radius:2px;
 	}
-	
+	.shiftaction:hover {
+	background-color:#000;
+}		
+.shiftalertchoice {
+	    padding: 2px;
+	    border-radius: 2px;
+	    background-color: #AA6666;
+	    color:#ffffff;
+}
 }
 
 

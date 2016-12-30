@@ -21,6 +21,12 @@ $(document).ready(function(){
 	return false;
     });
 
+    $("body").on("click",".shiftalert",function(){
+	$(this).parent().find(".shiftalertchoice").show(200); //doesn't work for new elements 
+	return false;
+    });
+
+
 });
 
 

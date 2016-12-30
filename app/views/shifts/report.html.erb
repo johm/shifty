@@ -28,7 +28,7 @@
   <% @shifts.collect {|x| x.workgroup}.uniq.each do |w| %>
   <tr>
     <td><%= link_to w.name,w %></td>
-    <td><%= @shifts.find_all {|s| s.workgroup==w}.inject(0){|sum,s| sum+s.hours_long } %></td>
+    <td><%= @shifts.find_all {|s| s.workgroup==w}.inject(0){|sum,s| sum+s.payable_hours_long } %></td>
     <td>$<%= @shifts.find_all {|s| s.workgroup==w}.inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></td>
     <td>$<%= @shifts.find_all {|s| s.workgroup==w}.inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></td>
     <td>$<%= @shifts.find_all {|s| s.workgroup==w}.inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></td>
@@ -39,7 +39,7 @@
   <% @shifts.collect {|x| x.task}.uniq.each do |t| %>
   <tr>
     <td><%= link_to t.name,t %></td>
-    <td><%= @shifts.where(:task=>t).inject(0){|sum,s| sum+s.hours_long } %></td>
+    <td><%= @shifts.where(:task=>t).inject(0){|sum,s| sum+s.payable_hours_long } %></td>
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></td>
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></td>
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></td>
@@ -50,7 +50,7 @@
   <% @shifts.collect {|x| x.worker}.sort_by {|w| w.firstname}.uniq.each do |w| %>
   <tr>
     <td><%= link_to w.name,w %></td>
-    <td><%= @shifts.where(:worker=>w).inject(0){|sum,s| sum+s.hours_long } %></td>
+    <td><%= @shifts.where(:worker=>w).inject(0){|sum,s| sum+s.payable_hours_long } %></td>
     <td>$<%= @shifts.where(:worker=>w).inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></td>
     <td>$<%= @shifts.where(:worker=>w).inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></td>
     <td>$<%= @shifts.where(:worker=>w).inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></td>
@@ -60,7 +60,7 @@
   <tr><th class="grayed" colspan="6">Totals</th></tr>
   <tr>
     <th>Total</th>
-    <th><%= @shifts.inject(0){|sum,s| sum+s.hours_long } %></th>
+    <th><%= @shifts.inject(0){|sum,s| sum+s.payable_hours_long } %></th>
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></th>
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></th>
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></th>

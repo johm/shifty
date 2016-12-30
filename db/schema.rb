@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801114449) do
+ActiveRecord::Schema.define(version: 20161230201305) do
 
   create_table "milestone_accomplishments", force: :cascade do |t|
     t.integer  "milestone_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160801114449) do
     t.datetime "updated_at",        null: false
     t.text     "description"
     t.integer  "shift_template_id"
+    t.string   "alert"
   end
 
   add_index "shifts", ["shift_template_id"], name: "index_shifts_on_shift_template_id"

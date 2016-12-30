@@ -9,4 +9,5 @@ $(".task-target").removeClass("bg-success");
 	$(this).find(".workgrouplabel").height($(this).height()+4);
     });
 $("#shift-<%= @shift.id %> .shiftdescription .best_in_place").html("click to describe this shift"); //make bip work for new shifts
- 
+
+$("#shift-<%= @shift.id %> .shiftalertchoice .best_in_place").best_in_place();

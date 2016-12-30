@@ -22,24 +22,28 @@
 </div>
 
 <table class="table">
-  <tr><th>Task</th><th>Hours</th><th>Wage due immediately</th><th>Capital account contribution</th><th>Anticipated wages</th><th>Total (anticipated) expense</th></tr>
+  <tr><th>Task</th><th>Hours</th><th>Wage due immediately</th><th>Capital account contribution</th><th>Anticipated wages</th><th>Total (anticipated) expense</th><th>Minutes late</th><th>Missed shifts</th></tr>
   <% @shifts.collect {|x| x.task}.uniq.each do |t| %>
   <tr>
     <td><%= t.name %></td>
-    <td><%= @shifts.where(:task=>t).inject(0){|sum,s| sum+s.hours_long } %></td>
+    <td><%= @shifts.where(:task=>t).inject(0){|sum,s| sum+s.payable_hours_long } %></td>
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></td>
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></td>
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></td>
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_expense } %></td>
+    <td><%= @shifts.where(:task=>t).inject(0){|sum,s| sum+s.minutes_late } %></td>
+    <td><%= @shifts.where(:task=>t).where("alert = 'nocall' or alert = 'noshow'").size %></td>
   </tr>
   <% end %>
   <tr>
     <th>Total</th>
-    <th><%= @shifts.inject(0){|sum,s| sum+s.hours_long } %></th>
+    <th><%= @shifts.inject(0){|sum,s| sum+s.payable_hours_long } %></th>
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_pay } %></th>
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_capital_contribution } %></th>
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_hourly_predicted_extra_wage } %></th>
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_expense } %></th>
+    <th><%= @shifts.inject(0){|sum,s| sum+s.minutes_late } %></th>
+    <th><%= @shifts.where("alert = 'nocall' or alert = 'noshow'").size %></th>
   </tr>
 
 

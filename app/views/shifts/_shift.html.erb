@@ -3,6 +3,7 @@
      class="shift col-<%= shift.minutes_long %>min start-<%= shift.minutes_from_eight %>min  shiftworker-<%= shift.worker_id %> "
      >
   <a href="#" class="shiftedit"><i class="shiftaction fa fa-edit"></i></a>
+  <a href="#" class="shiftalert"><i class="shiftaction fa fa-exclamation-circle"></i></a>
   <%= link_to('<i class="shiftaction fa fa-trash-o"></i>'.html_safe, shift, :remote=>true, :method => :delete,:class=>"") %>
 
   <i class="fa fa-heart"></i>
@@ -15,6 +16,10 @@
 
   <div class="shiftdescription" style="display:none;">
     <%= best_in_place shift, :description, :place_holder => "click to describe this shift" %>
+  </div>
+
+  <div class="shiftalertchoice" style="<%= 'display:none;' if (shift.alert.nil? || shift.alert=='ontime') %>">
+    <%= best_in_place shift, :alert, :as => :select ,:collection => Shift::ALERTS %>
   </div>
 
 

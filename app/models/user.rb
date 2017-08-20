@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :worker 
 
+  def to_s
+    email
+  end
+
 end

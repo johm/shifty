@@ -11,7 +11,7 @@ class Shift < ActiveRecord::Base
   validates :worker,:presence => true
 
 
-  ALERTS = { ontime: "On time!", noshow: "No Show", nocall: "No Call No Show", late15: "15 minutes late", late30: "30 minutes late", late45: "45 minutes late", late60: "1 hour late", late75: "1 hour 15 minutes late", late90: "1 hour 30 minutes late", late105: "1 hour 45 minutes late", late120: "2 hours late" } 
+  ALERTS = { ontime: "On time!", noshow: "No Show", nocall: "No Call No Show", alittlelate: "A little late", late15: "15 minutes late", late30: "30 minutes late", late45: "45 minutes late", late60: "1 hour late", late75: "1 hour 15 minutes late", late90: "1 hour 30 minutes late", late105: "1 hour 45 minutes late", late120: "2 hours late" } 
   
   validates_inclusion_of :alert, :in => ALERTS.keys.map {|x| x.to_s} , :allow_nil => true
   
@@ -55,6 +55,8 @@ class Shift < ActiveRecord::Base
     
     payable_minutes=case alert
     when "ontime"
+      minutes_long
+    when "alittlelate"
       minutes_long
     when "noshow"
       0

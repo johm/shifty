@@ -22,7 +22,7 @@
 </div>
 
 <table class="table">
-  <tr><th>Task</th><th>Hours</th><th>Wage due immediately</th><th>Capital account contribution</th><th>Anticipated wages</th><th>Total (anticipated) expense</th><th>Minutes late</th><th>Missed shifts</th></tr>
+  <tr><th>Task</th><th>Hours</th><th>Wage due immediately</th><th>Capital account contribution</th><th>Anticipated wages</th><th>Total (anticipated) expense</th><th>Minutes late</th><th>Missed shifts</th><th>Requested sick/family leave</th></tr>
   <% @shifts.collect {|x| x.task}.uniq.each do |t| %>
   <tr>
     <td><%= t.name %></td>
@@ -33,6 +33,7 @@
     <td>$<%= @shifts.where(:task=>t).inject(Money.new(0)){|sum,s| sum+s.total_expense } %></td>
     <td><%= @shifts.where(:task=>t).inject(0){|sum,s| sum+s.minutes_late } %></td>
     <td><%= @shifts.where(:task=>t).where("alert = 'nocall' or alert = 'noshow'").size %></td>
+    <td><%= @shifts.where(:task=>t).where("alert = 'sick'").size %></td>
   </tr>
   <% end %>
   <tr>
@@ -44,6 +45,7 @@
     <th>$<%= @shifts.inject(Money.new(0)){|sum,s| sum+s.total_expense } %></th>
     <th><%= @shifts.inject(0){|sum,s| sum+s.minutes_late } %></th>
     <th><%= @shifts.where("alert = 'nocall' or alert = 'noshow'").size %></th>
+    <th><%= @shifts.where("alert = 'sick'").size %></th>
   </tr>
 
 

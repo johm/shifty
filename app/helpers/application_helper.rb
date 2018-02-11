@@ -18,6 +18,7 @@ module ApplicationHelper
       summary[w.name]={
         worker: w,
         hours: shifts.find_all {|s| s.worker_id==w_id}.inject(0) {|sum,shift| sum+shift.payable_hours_long },
+        sick_hours: shifts.find_all {|s| s.worker_id==w_id && s.alert == "sick"}.inject(0) {|sum,shift| sum+shift.hours_long },
         total_hourly_pay: shifts.find_all {|s| s.worker_id==w_id}.inject(0) {|sum,shift| sum+shift.total_hourly_pay},
         total_hourly_capital_contribution: shifts.find_all {|s| s.worker_id==w_id}.inject(0) {|sum,shift| sum+shift.total_hourly_capital_contribution},
         total_hourly_predicted_extra_wage: shifts.find_all {|s| s.worker_id==w_id}.inject(0) {|sum,shift| sum+shift.total_hourly_predicted_extra_wage}

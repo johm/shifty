@@ -33,6 +33,8 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <%= favicon_link_tag 'favicon-32x32.png', :rel => 'shortcut icon', :type => 'image/png' %>
+
 
     <%= javascript_include_tag "application" %>
   </head>
@@ -105,7 +107,7 @@
 	    <% if current_user.has_role? :admin %>
 	    <li><%= link_to 'Milestones',milestones_path %></li>
 	    <li>
-	      <%= link_to 'Admin', users_path %>
+	      <%= link_to 'Users', users_path %>
 	    </li>
 	    <% end %>
 	    <% end %>

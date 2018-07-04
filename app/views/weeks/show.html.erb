@@ -62,7 +62,7 @@ Shift template: <%= @shift_template.name %> <br />
   </div> 
   <div class="col-content">
     <% Workgroup.all.each do |workgroup| %>
-    <div class="workgrouprow col-with-label workgroup-row-<%= workgroup.id %>" >
+    <div class="workgrouprow col-with-label workgroup-row-<%= workgroup.id %>  <%= 'active' if workgroup.active? %>" >
       <div class="col-label"><div class="workgrouplabel"><%= workgroup.name %></div></div>
       <div class="col-content">
 	

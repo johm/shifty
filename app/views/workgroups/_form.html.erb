@@ -22,6 +22,16 @@
     </div>
     <%= error_span(@workgroup[:name]) %>
   </div>
+  <div class="control-group">
+    <%= f.label "Active?", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :active, :class => 'form-control' %>
+      
+    </div>
+    <%= error_span(@workgroup[:active]) %>
+  </div>
+
+<hr />
 
   <div class="row">
 

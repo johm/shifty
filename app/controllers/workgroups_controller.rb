@@ -77,6 +77,6 @@ class WorkgroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workgroup_params
-      params.require(:workgroup).permit(:name,{:worker_ids => []},tasks_attributes: [:id, :name])
+      params.require(:workgroup).permit(:name,:active,{:worker_ids => []},tasks_attributes: [:id, :name])
     end
 end

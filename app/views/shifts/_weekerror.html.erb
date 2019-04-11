@@ -1,2 +1,3 @@
-<i class="fa <%= doublebooked?(shifts) ? "fa-warning" : "fa-check" %>"></i>
-<%= doublebooked?(shifts) %>
+<% dbkd=doublebooked?(shifts) %>
+<i class="fa <%= dbkd ? "fa-warning" : "fa-check" %>"></i>
+<small><%= dbkd ? dbkd : "" %></small>

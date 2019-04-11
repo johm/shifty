@@ -29,11 +29,11 @@ module ApplicationHelper
 
 
   def doublebooked?(shifts)
-    possible_overlaps=shifts.group_by {|s| [s.worker.id,s.day_of_week] }.values.find_all {|a| a.length > 1}   # get shifts for same worker on same day of week when worker has two shifts on that day 
+    possible_overlaps=shifts.find_all{|x| ! x.worker.utility}.group_by {|s| [s.worker.id,s.day_of_week] }.values.find_all {|a| a.length > 1}   # get shifts for same worker on same day of week when worker has two shifts on that day 
     possible_overlaps.each do |po| 
       po.each do |shift| #for each possibly overlapping shift
         po.find_all{|y| y != shift}.each do |anothershift| #look at all the other shifts that might overlap
-          return "#{shift.worker.name} #{shift.day_of_week}" if shift.shiftrange.overlaps?(anothershift.shiftrange) #return if you find an overlap
+          return "#{shift.worker.name} #{["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][shift.day_of_week]}" if shift.shiftrange.overlaps?(anothershift.shiftrange) #return if you find an overlap
         end
       end
     end

@@ -28,5 +28,18 @@ module ApplicationHelper
   end
 
 
+  def doublebooked?(shifts)
+    possible_overlaps=shifts.group_by {|s| [s.worker.id,s.day_of_week] }.values.find_all {|a| a.length > 1}   # get shifts for same worker on same day of week when worker has two shifts on that day 
+    possible_overlaps.each do |po| 
+      po.each do |shift| #for each possibly overlapping shift
+        po.find_all{|y| y != shift}.each do |anothershift| #look at all the other shifts that might overlap
+          return true if shift.shiftrange.overlaps?(anothershift.shiftrange) #return if you find an overlap
+        end
+      end
+    end
+    
+    
+    return false
+  end
 
 end

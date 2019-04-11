@@ -12,6 +12,7 @@
 
 <h1 id="weekheader">
   <a href="#" id="weeklock"><i class="fa fa-unlock"></i></a>
+  <span id="weekerror"><%= render :partial => "shifts/weekerror", :locals => {:shifts => @shifts } %></span>
 <% unless @monday.nil? %>
   <a href="/weeks/<%= @monday-7.days %>"><i class="fa fa-arrow-left"></i></a>
   Week of: <%= @monday %>
@@ -167,6 +168,7 @@ Shift template: <%= @shift_template.name %> <br />
 
 <%= content_for :sidebar do %>
 <a class="btn btn-info  btn-xs" id="toggledescriptions" role="button"><i class="fa fa-edit"></i> Toggle descriptions</a>
+<a class="btn btn-info  btn-xs" id="toggleunavailable" role="button"><i class="fa fa-edit"></i> Toggle unavailable</a>
 <h3>Workgroups</h3>
 <ul style="list-style-type:none;padding-left:10px;">
 <% Workgroup.all.each do |workgroup| %>

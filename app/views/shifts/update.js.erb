@@ -3,3 +3,8 @@ $("#shift-<%= @shift.id %>").effect("highlight");
 $("#shift-<%= @shift.id %>").find(".shift-start-time").html("<%=  @shift.start_time.strftime("%l:%M") %>");
 $("#shift-<%= @shift.id %>").find(".shift-end-time").html("<%=  @shift.end_time.strftime("%l:%M") %>");
 $("#shiftsummary").html("<%= escape_javascript(render :partial=>"shifts/shiftsummary",:locals=>{:shifts=>@shift.shifts_this_week}) %>");
+$("#weekerror").html("<%= escape_javascript(render :partial=>"shifts/weekerror",:locals=>{:shifts=>@shift.shifts_this_week}) %>");
+$("#shift-<%= @shift.id %>").find(".unavail").hide();
+<% if @shift.unavailable %>
+$("#shift-<%= @shift.id %>").addClass(".unavailableshift");
+<% end %>

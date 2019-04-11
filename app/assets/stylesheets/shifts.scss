@@ -39,3 +39,9 @@ background-color:rgba(255,255,255,0.8);
 .shift select, .shift input {
 color: #333;
 }
+
+.unavailableshift {background-color:#ccc;color:#c00;opacity:.5}
+
+.unavailableshift .shift-start-time::before {
+content: "NOT AVAIL";
+}

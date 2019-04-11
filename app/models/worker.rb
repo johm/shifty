@@ -32,5 +32,9 @@ class Worker < ActiveRecord::Base
     shifts.where(:shift_template_id=>nil).where("monday <= ?",on_date).inject(0) {|sum,s| sum+s.hours_long } 
   end
 
+  def review_questions
+    ReviewQuestion.all.find_all {|rq| rq.applies_to_worker?(self)}
+  end 
+
 
 end

@@ -17,7 +17,7 @@ class Shift < ActiveRecord::Base
   
   
   def shiftrange 
-    Tod::Shift.new(start_time,end_time)
+    Tod::Shift.new(start_time,end_time,true) #exclude end
   end
 
   def minutes_long

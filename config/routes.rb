@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     member do
       post 'colorfix'
+      put 'makeunavail'
     end
   end
 

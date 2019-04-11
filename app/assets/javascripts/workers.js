@@ -47,6 +47,7 @@ function togglelockweek(){
 	$(".shift .fa-trash-o").hide(200);
 	$(".shift .fa-edit").hide(200);
 	$(".shift .fa-exclamation-circle").hide(200);
+	$(".shift .unavail").hide(200);
 	}
     else {
 	$(".ui-draggable").draggable("enable");
@@ -56,6 +57,7 @@ function togglelockweek(){
 	$(".shift .fa-trash-o").show(200);
 	$(".shift .fa-edit").show(200);
 	$(".shift .fa-exclamation-circle").show(200);
+	$(".shift .unavail").show(200);
 	}
 }
 

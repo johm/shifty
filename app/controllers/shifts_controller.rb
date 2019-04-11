@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_shift, only: [:show, :edit, :update, :destroy,:colorfix]
+  before_action :set_shift, only: [:show, :edit, :update, :destroy,:colorfix,:makeunavail]
   load_and_authorize_resource
   # GET /shifts
   # GET /shifts.json
@@ -17,6 +17,21 @@ class ShiftsController < ApplicationController
     @from_date=params[:from_date]
     @to_date=params[:to_date]
     @shifts=Shift.where(:shift_template_id => nil ).where("monday >= ? and monday < ?",@from_date,@to_date)
+  end
+
+  def makeunavail
+
+    @shift.unavailable=true
+    respond_to do |format|
+      if @shift.save!
+        format.html { redirect_to @shift, notice: 'Shift was successfully updated.' }
+        format.json { render :show, status: :created, location: @shift }
+        format.js {render :action => "update"}
+      else
+        format.html { render :new }
+        format.json { render json: @shift.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def colorfix 

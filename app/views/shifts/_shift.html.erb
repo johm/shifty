@@ -1,9 +1,13 @@
 <div id="shift-<%= shift.id %>" 
      data-shift-id="<%= shift.id %>" 
-     class="shift col-<%= shift.minutes_long %>min start-<%= shift.minutes_from_eight %>min  shiftworker-<%= shift.worker_id %> "
+     class="shift col-<%= shift.minutes_long %>min start-<%= shift.minutes_from_eight %>min  shiftworker-<%= shift.worker_id %> <%= 'unavailableshift' if shift.unavailable %>"
      >
   <a href="#" class="shiftedit"><i class="shiftaction fa fa-edit"></i></a>
   <a href="#" class="shiftalert"><i class="shiftaction fa fa-exclamation-circle"></i></a>
+<% if ! shift.unavailable? %> 
+  <%= link_to('<i class="shiftaction fa unavail">⃠</i>'.html_safe, makeunavail_shift_path(shift,:authenticity_token => form_authenticity_token), :remote=>true, :method => :put,:class=>"") %>
+<% end %> 
+
   <%= link_to('<i class="shiftaction fa fa-trash-o"></i>'.html_safe, shift, :remote=>true, :method => :delete,:class=>"") %>
 
   <i class="fa fa-heart"></i>

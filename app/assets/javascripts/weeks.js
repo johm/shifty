@@ -15,6 +15,20 @@ $(document).ready(function(){
 	}
     });
     
+    $("#toggleunavailable").on("click",function(){
+	if ($(this).hasClass("active")){
+	    $(this).removeClass("active");
+	    $(".unavailableshift").hide("fade");
+	    
+	}
+	else {
+	    $(this).addClass("active");
+	    $(".unavailableshift").show("fade");
+	}
+    });
+
+
+
     $(".task-target").on("dblclick",function(event){
 	
 	if (! $(document.elementFromPoint(event.pageX,event.pageY)).hasClass("shift")) {

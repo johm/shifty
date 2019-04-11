@@ -33,7 +33,7 @@ module ApplicationHelper
     possible_overlaps.each do |po| 
       po.each do |shift| #for each possibly overlapping shift
         po.find_all{|y| y != shift}.each do |anothershift| #look at all the other shifts that might overlap
-          return true if shift.shiftrange.overlaps?(anothershift.shiftrange) #return if you find an overlap
+          return "#{shift.worker.name} #{shift.day_of_week}" if shift.shiftrange.overlaps?(anothershift.shiftrange) #return if you find an overlap
         end
       end
     end

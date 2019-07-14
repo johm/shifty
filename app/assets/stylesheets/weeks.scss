@@ -6,7 +6,7 @@
     background-color:#f6f6f6;
 }
 
-@for $i from 1 through 32 {                                                                                                                                
+@for $i from 1 through 34 {                                                                                                                                
     .col-#{$i*30}min {                                                                                                                                     
 	width: ($i/34) * 100%;}                                                                                                                             
  .start-#{($i - 1)*30}min {                                                                                                                               

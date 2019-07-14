@@ -38,7 +38,7 @@ Shift template: <%= @shift_template.name %> <br />
       <div class="col-content"> 
 	<div class="col-with-flat-label hours">
 	  <div class="col-content time-ticks"> 
-	    <% (0..31).each do |i| %> 
+	    <% (0..33).each do |i| %> 
 	    
 	    <div style="height:2000px;" class="<%= "col-30min start-#{i*30}min" %>" data-start-time="<%= colindex_to_time(i).strftime("%l:%M%p") %>" ><% if i % 2 == 0 %> <%= colindex_to_time(i).strftime("%l%p") %> <% end %></div>
 	    

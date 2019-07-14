@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def colindex_to_time(i) 
-    Tod::TimeOfDay.new("8","0")+(i*30).minutes
+    Tod::TimeOfDay.new("7","0")+(i*30).minutes
   end
 
   def shifts_to_summary(shifts)
